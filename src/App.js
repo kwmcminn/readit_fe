@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import BookContainer from './Containers/BookContainer'
+import BooksContainer from './Containers/BooksContainer'
 const BOOKAPI = `http://localhost:3000/books`
 class App extends Component {
    constructor (){
@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div>
-         <BookContainer books={this.state.books}/>
+         <BooksContainer books={this.state.books}/>
       </div>
 
     );

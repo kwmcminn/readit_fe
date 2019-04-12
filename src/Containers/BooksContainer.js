@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Book from '../Component/Book';
 
-class BookContainer extends Component {
+class BooksContainer extends Component {
 
    render() {
       return (
@@ -15,4 +15,4 @@ class BookContainer extends Component {
 
 }
 
-export default BookContainer;
+export default BooksContainer;
