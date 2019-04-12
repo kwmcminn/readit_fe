@@ -18,6 +18,7 @@ class App extends Component {
              this.setState({
                 books: json
              })
+             console.log(json[0].paragraph)
          })
    }
 
