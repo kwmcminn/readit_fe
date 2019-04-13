@@ -18,14 +18,18 @@ class App extends Component {
              this.setState({
                 books: json
              })
-             console.log(json[0].paragraph)
          })
+   }
+
+   renderBooks = () => {
+      return this.state.books.length > 0 ? <BooksContainer books={this.state.books}/> : null
    }
 
   render() {
     return (
-      <div>
-         <BooksContainer books={this.state.books}/>
+      <div className='app-container'>
+         <h1> HI </h1>
+         {this.renderBooks()}
       </div>
 
     );
