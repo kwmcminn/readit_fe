@@ -37,6 +37,7 @@ class BooksContainer extends Component {
          <GradeContainer books={this.state.first} className='first-grade'/>
          <GradeContainer books={this.state.second} className='second-grade'/>
          <GradeContainer books={this.state.third} className='third-grade'/>
+
          </div>
       );
    }
