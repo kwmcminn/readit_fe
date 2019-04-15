@@ -23,9 +23,7 @@ export default GradeContainer;
                   })
                } */
 
-// {this.props.kindergarten.map((book) => {
-//    return <Book book={book} className='kindergarten' />
-// })}
+
 
 // {this.props.first.map((book) => {
 //    return <Book book={book} className='first-grade' />

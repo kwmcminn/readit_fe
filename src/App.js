@@ -25,10 +25,7 @@ class App extends Component {
          .then(response => response.json())
          .then(json => {
             this.setState({
-               books: json,
-               kindergarten: null,
-               second: null,
-               third: null
+               books: json
             }, () => this.fetchingGrades())
          })
    }
@@ -48,7 +45,7 @@ class App extends Component {
 
    render() {
       return (
-         <div >
+         <div className='app-container' >
             <BooksContainer books={this.state.books} kindergarten={this.state.kindergarten} first={this.state.first} second={this.state.second} third={this.state.third} />
          </div>
       )
@@ -58,4 +55,3 @@ class App extends Component {
 }
 
 export default App;
-
