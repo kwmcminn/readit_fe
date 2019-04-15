@@ -1,40 +1,61 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import NavContainer from './Containers/NavContainer'
-
+import BooksContainer from './Containers/BooksContainer'
 const BOOKAPI = `http://localhost:3000/books`
 class App extends Component {
    constructor() {
       super()
       this.state = {
-         books: []
+         books: [],
+         kindergarten: [],
+         first: [],
+         second: [],
+         third: []
       }
+      this.grabBooks = this.grabBooks.bind(this)
+      this.fetchingGrades = this.fetchingGrades.bind(this)
    };
 
    componentDidMount() {
       this.grabBooks()
-         .then(books => console.log(this.state.books))
    }
 
-   grabBooks = () => {
-      return fetch(BOOKAPI)
+   grabBooks() {
+      fetch(BOOKAPI)
          .then(response => response.json())
          .then(json => {
             this.setState({
-               books: json
-            })
+               books: json,
+               kindergarten: null,
+               second: null,
+               third: null
+            }, () => this.fetchingGrades())
          })
+   }
+
+   fetchingGrades() {
+      let kindergarten0 = this.state.books.filter(book => book.grade.name === 'Kindergarten')
+      let firstGrade1 = this.state.books.filter(book => book.grade.name.includes('First'))
+      let secondGrade2 = this.state.books.filter(book => book.grade.name.includes('Second'))
+      let thirdGrade3 = this.state.books.filter(book => book.grade.name.includes('Third'))
+      this.setState({
+         kindergarten: kindergarten0,
+         first: firstGrade1,
+         second: secondGrade2,
+         third: thirdGrade3
+      })
    }
 
    render() {
       return (
-         <NavContainer books={this.state.books} />
+         <div >
+            <BooksContainer books={this.state.books} kindergarten={this.state.kindergarten} first={this.state.first} second={this.state.second} third={this.state.third} />
+         </div>
       )
    }
 
-}
 
+}
 
 export default App;
 

@@ -2,17 +2,14 @@ import React from 'react';
 
 const Book = props => {
 
-   let para = JSON.parse(props.book.paragraph)
-
-
-return (
-   <div>
-   <h3>{props.book.title}</h3>
-   <img src={props.book.image}/>
-      {para.map(para =>
-         <h1>{para}</h1>
-      )}
-   </div>
+   return (
+      <div className='grade-header'>
+         <h2 className='grade-title'>{props.book.title}</h2>
+         <div className='grade-body'>
+            <img alt="" className='book-cover' src={props.book.image} />
+         </div>
+         <div className='grade-footer' />
+      </div >
    )
 }
 export default Book;

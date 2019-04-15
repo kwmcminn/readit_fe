@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import BooksContainer from '../Containers/BooksContainer'
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
 import NewBookForm from '../Component/NewBookForm'
 
 
@@ -12,6 +11,7 @@ class NavContainer extends Component {
       collapsed: true
     }
     this.toggleNavbar = this.toggleNavbar.bind(this);
+
   };
 
   toggleNavbar() {
@@ -19,6 +19,8 @@ class NavContainer extends Component {
       collapsed: !this.state.collapsed
     })
   }
+
+
 
   render() {
 
@@ -31,15 +33,15 @@ class NavContainer extends Component {
             <Collapse isOpen={!this.state.collapsed} navbar>
               <Nav navbar>
                 <NavItem>
-                  <Link activeClassName="active" to="/">Home</Link>{' '}
+                  <Link to="/">Home</Link>{' '}
                 </NavItem>
                 <NavItem>
-                  <Link activeClassName="active" to="/CreateBook">Create a Book</Link>{' '}
+                  <Link to="/CreateBook">Create a Book</Link>{' '}
                 </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
-          <Route path="/" exact component={() => <BooksContainer books={this.props.books} />} />
+          <Route path="/" exact component={() => <BooksContainer books={this.props.books} kindergarten={this.props.kindergarten} first={this.props.first} second={this.props.second} third={this.props.third} />} />
           <Route path="/CreateBook" exact component={() => <NewBookForm />} />
         </div>
       </Router>

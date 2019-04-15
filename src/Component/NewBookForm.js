@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-class CreateBook
+class NewBookForm
   extends Component {
-  constructor() {
-    super()
-  }
+
 
   handleChange = (event) => {
     this.setState({
@@ -62,4 +60,4 @@ class CreateBook
   }
 }
 
-export default CreateBook;
+export default NewBookForm;

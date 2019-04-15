@@ -1,24 +1,15 @@
 import React from 'react';
-import Book from '../Component/Book';
+import Book from '../Component/Book'
 
 class GradeContainer extends React.Component {
-   componentDidUpdate(){
-      console.log('hi', this.props)
-   }
-
    render() {
       return (
-         <div className={this.props.className}>
-         // <div className='grade-header' />
-         // <span className='grade-title'>{this.props.className}</span>
-         // <div className='grade-body'>
-         // <span></span>
-         // <img className='book-cover'/>
-         // <span></span>
-         //
-         // </div>
-         // <div className='grade-footer'/>
-         </div>
+         <div>
+            {this.props.first.map((book) => {
+               return <Book book={book} className='my-books' />
+            })}
+         </div >
+
       );
    }
 
@@ -26,3 +17,24 @@ class GradeContainer extends React.Component {
 }
 
 export default GradeContainer;
+/* {
+                  this.props.kindergarten.map((book) => {
+                     return <Book book={book} className='my-books' />
+                  })
+               } */
+
+// {this.props.kindergarten.map((book) => {
+//    return <Book book={book} className='kindergarten' />
+// })}
+
+// {this.props.first.map((book) => {
+//    return <Book book={book} className='first-grade' />
+// })}
+
+// {this.props.second.map((book) => {
+//    return <Book book={book} className='second-grade' />
+// })}
+
+// {this.props.third.map((book) => {
+//    return <Book book={book} className='third-grade' />
+// })}
