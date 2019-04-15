@@ -1,26 +1,27 @@
-html {
-   height: 100%;
-}
-
-body {
-   min-height: 100%;
-   background-color: goldenrod;
-}
-
-#root {
-   min-height: 100vh;
-}
 
 .app-container {
-   min-height: 100vh;
+   display: grid;
+   grid-template-columns: 5% 1fr 5%;
 
 }
 
-.book-container {
+.nav-bar {
+   grid-column: 1/4;
+}
+
+
+.books-container {
+   grid-column: 2;
    display: grid;
    grid-template-rows: repeat(5, 1fr);
-   grid-template-columns: 5% 1fr 5%;
-   height: 50%;
+   min-height: 240vh;
+}
+
+.grade-container{
+   display: grid;
+   grid-template-rows: 20% 70% 10%;
+   grid-template-columns: 10% 1fr 10%;
+   min-height: 100%;
 }
 
 .my-books {
@@ -61,4 +62,40 @@ body {
    grid-row: 5/6;
    grid-column: 2;
    text-align: center;
+}
+
+.single-book-container{
+   grid-column: 2;
+}
+
+.single-book{
+   grid-row: 2;
+   text-align: center;
+   max-height: 30%;
+}
+
+.book-cover{
+   max-height: ;
+   border-radius: 5%;
+}
+
+.grade-title{
+   grid-column: 1/4;
+   text-align: center;
+}
+.back-button{
+   grid-column: 1;
+   grid-row: 2;
+}
+
+.forward-button{
+   grid-column: 3;
+   grid-row: 2;
+}
+
+.three-books{
+   display: flex;
+   grid-column: 2;
+   grid-row: 2;
+   max-width: 100%
 }

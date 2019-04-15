@@ -1,14 +1,12 @@
 import React from 'react';
 
 const Book = props => {
-
+   console.log('book props', props);
    return (
-      <div className='grade-header'>
-         <h2 className='grade-title'>{props.book.title}</h2>
-         <div className='grade-body'>
-            <img alt="" className='book-cover' src={props.book.image} />
-         </div>
-         <div className='grade-footer' />
+      <div className='single-book'>
+         <h4 className='book-title'>{props.book.title}</h4>
+         <img alt="" className='book-cover' src={props.book.image} />
+         <h5 className='author'>{props.book.author}</h5>
       </div >
    )
 }

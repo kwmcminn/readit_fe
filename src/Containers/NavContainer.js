@@ -27,7 +27,7 @@ class NavContainer extends Component {
     return (
       <Router>
         <div>
-          <Navbar color="faded" light>
+          <Navbar className='nav-bar' color="faded" light>
             <Link to='/'><NavbarBrand className="mr-auto">ReadIt</NavbarBrand></Link>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse isOpen={!this.state.collapsed} navbar>

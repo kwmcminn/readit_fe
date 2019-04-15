@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 
-class NewBookForm
-  extends Component {
+class NewBookForm extends Component {
+  constructor() {
+    super()
+    this.state = {
+      title: "",
+      paragraph: "",
+      author: "",
+      grade: "",
+      image: ""
+    }
+  }
 
 
   handleChange = (event) => {
@@ -12,6 +21,10 @@ class NewBookForm
 
   handleSubmit = (event) => {
     event.preventDefault()
+    console.log("about to post", this.state)
+    this.props.makeNewBook(this.state.paragraph, this.state.author, this.state.grade, this.state.image, this.state.title)
+
+
 
   }
 
@@ -34,6 +47,11 @@ class NewBookForm
             </label>
           </p>
 
+          <p>
+            <label>Poem Grade Level:
+            <input name="grade" type='text' placeholder="What Grade Level" />
+            </label>
+          </p>
 
           <p>
             <label>Poem Author:
