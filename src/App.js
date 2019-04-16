@@ -3,7 +3,9 @@ import './App.css';
 import MenuExampleEvenlyDivided from './Containers/Menu'
 import BooksContainer from './Containers/BooksContainer'
 import NewBookForm from './Component/NewBookForm'
+import UserSignIn from './Component/UserSignIn';
 const BOOKAPI = `http://localhost:3000/books`
+
 class App extends Component {
    constructor() {
       super()
@@ -13,20 +15,21 @@ class App extends Component {
          first: [],
          second: [],
          third: [],
+         myBooks: [],
          bookShowing: false,
          myBooksIndex: 0,
          kindergartenIndex: 0,
          firstIndex: 0,
          secondIndex: 0,
          thirdIndex: 0,
-         formShowing: false
+         formShowing: false,
+         user_id: ""
       }
-      // this.grabBooks = this.grabBooks.bind(this)
       this.fetchingGrades = this.fetchingGrades.bind(this)
    };
 
    componentDidMount() {
-       fetch(BOOKAPI)
+      fetch(BOOKAPI)
          .then(response => response.json())
          .then(json => {
             this.setState({
@@ -47,26 +50,58 @@ class App extends Component {
          second: secondGrade2,
          third: thirdGrade3
       }, () => console.log(this.state))
-
    }
 
+   // Creating a new booko and saving it to the db
+
    makeNewBook = (paragraph, author, grade, image, title) => {
-    console.log("in make a new book", paragraph, author, grade, image, title)
-    fetch(BOOKAPI, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-          grade_id: grade,
-          title: title,
-          image: image,
-          paragraph: paragraph,
-          author: author,
-          user_id: 1
-      })
-    }).then(this.setState({
-      formShowing: false
-    }))
-}
+      fetch(BOOKAPI, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({
+            grade_id: grade,
+            title: title,
+            image: image,
+            paragraph: paragraph,
+            author: author,
+            user_id: localStorage.getItem('user_id')
+         })
+      }).then((response) => {
+         return response.json();
+      }).then((json) => {
+         console.log("new Poem Json", json)
+         let newPoem = json
+         let test = [...this.state.myBooks, newPoem]
+         console.log("testing adding mybook", test)
+         this.setState({
+            myBooks: [...this.state.myBooks, newPoem]
+         })
+      }).then(this.setState({
+         formShowing: false
+      }))
+   }
+
+
+   //Creating a new user
+
+   createUser = (data) => {
+      fetch(`http://localhost:3000/users`, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({
+            username: data.username
+         })
+      }).then((response) => {
+         return response.json();
+      }).then((json) => {
+         localStorage.setItem('user_id', json.id);
+         let newid = localStorage.getItem('user_id')
+         this.setState({
+            user_id: newid
+         })
+      });
+   }
+
 
    showBookDetails = () => {
       this.setState({
@@ -79,7 +114,6 @@ class App extends Component {
          formShowing: true
       })
    }
-
 
    nextBooks = () => {
       this.setState({
@@ -95,11 +129,15 @@ class App extends Component {
 
    render() {
       return (
-         <div className='app-container' >
-            <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails}/>
+         <div>
+            <UserSignIn createUser={this.createUser} />
 
-            {this.state.formShowing ?
-               <NewBookForm makeNewBook={this.makeNewBook} /> :
+
+            <div className='app-container' >
+               <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
+
+               {this.state.formShowing ?
+                  <NewBookForm makeNewBook={this.makeNewBook} /> :
 
                   <BooksContainer
                      books={this.state.books}
@@ -111,20 +149,21 @@ class App extends Component {
                      secondIndex={this.state.secondIndex}
                      third={this.state.third}
                      thirdIndex={this.state.thirdIndex}
-                     />}
+                  />}
+            </div>
          </div>
       )
    }
 }
-//    <div className='grade-title'></div>
-//    <div className='single-book-container'>
-//       <div className='single-book'>
-//          <h4>Title</h4>
-//       </div>
-//    </div>
-//    <div className='grade-container'></div>
-//    <div className='grade-container'></div>
-//    <div className='grade-container'></div>
-//    <div className='grade-container'></div>
 
 export default App
+
+
+
+
+
+
+
+
+
+
