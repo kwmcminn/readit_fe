@@ -117,9 +117,7 @@ class App extends Component {
                'Content-Type': 'application/json'
             }
          }).then((response) => {
-            return response.json();
-         }).then((json) => {
-            this.deleteBook(json.id)
+            this.deleteBook(id)
          })
    }
 
@@ -139,9 +137,7 @@ class App extends Component {
                'Content-Type': 'application/json'
             }
          }).then((response) => {
-            return response.json();
-         }).then((json) => {
-            this.updateBook(json)
+            this.updateBook(book)
          })
    }
 
@@ -153,10 +149,8 @@ class App extends Component {
       })
    }
 
-
-
-
    showBookDetails = book => {
+      debugger
       this.setState({
          bookShowing: true,
          formShowing: false,
@@ -197,18 +191,19 @@ class App extends Component {
    }
 
    increaseSpeed = () => {
-         this.setState({
-            speed: this.state.speed*.8
-         })
+      this.setState({
+         speed: this.state.speed * .8
+      })
    }
 
    decreaseSpeed = () => {
-         this.setState({
-            speed: this.state.speed*1.2
-         })
+      this.setState({
+         speed: this.state.speed * 1.2
+      })
    }
 
    render() {
+
       let currentDisplay;
       if (this.state.formShowing && this.state.bookShowing === false) {
          currentDisplay = <NewBookForm makeNewBook={this.makeNewBook} />
@@ -216,13 +211,13 @@ class App extends Component {
       else if (this.state.formShowing === false && this.state.bookShowing) {
 
 
-         currentDisplay =<div className='paragraph-show-div'>
-                           <button onClick={this.increaseSpeed}>Increase</button>
-                           <button onClick={this.decreaseSpeed}>Decrease</button>
-                           <div className='marquee'>
-                              <span id='scrolling-paragraph' style={{animation: `marquee linear ${this.state.speed}s infinite`}} >{this.state.displayedBook.paragraph}</span>
-                           </div>
-                        </div>
+         currentDisplay = <div className='paragraph-show-div'>
+            <button onClick={this.increaseSpeed}>Increase</button>
+            <button onClick={this.decreaseSpeed}>Decrease</button>
+            <div className='marquee'>
+               <span id='scrolling-paragraph' style={{ animation: `marquee linear ${this.state.speed}s infinite` }} >{this.state.displayedBook.paragraph}</span>
+            </div>
+         </div>
 
       }
       else {
@@ -248,6 +243,7 @@ class App extends Component {
 
       return (
          <div className='app-container'>
+            <UserSignIn createUser={this.createUser} />
             <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
             {currentDisplay}
          </div>

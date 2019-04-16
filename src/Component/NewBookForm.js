@@ -29,7 +29,7 @@ class NewBookForm extends Component {
     return (
       <div>
 
-        <form className="ui equal width form" onChange={this.handleChange} onSubmit={this.handleSubmit}>
+        <form className="ui equal width form" onChange={(event) => this.handleChange(event)} onSubmit={(event) => this.handleSubmit(event)}>
           <div className="field">
             <label>Poem Title:
             <input name="title" type='text' placeholder="Poem Title" />
@@ -52,10 +52,10 @@ class NewBookForm extends Component {
             <label>Grade</label>
             <select name="grade_id" className="ui fluid dropdown">
               <option value="">Grade</option>
-              <option value="0">Kindergarten</option>
-              <option value="1">First</option>
-              <option value="2">Second</option>
-              <option value="3">Third</option>
+              <option value="1">Kindergarten</option>
+              <option value="2">First</option>
+              <option value="3">Second</option>
+              <option value="4">Third</option>
             </select>
           </div>
 

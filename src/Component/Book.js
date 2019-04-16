@@ -6,13 +6,13 @@ const Book = props => {
          {
             props.book.user_id === parseInt(localStorage.getItem('user_id')) ?
 
-               <div className='single-book' onClick={() => props.showBookDetails(props.book)}>
+               <div className='single-book' >
                   <h4 className='book-title'>{props.book.title}</h4>
 
-                  <img alt="" className='book-cover' src={props.book.image} />
+                  <img alt="" className='book-cover' src={props.book.image} onClick={() => props.showBookDetails(props.book)} />
                   <h5 className='author'> Author Goes Here </h5>
-                  <button onClick={() => props.handleDelete(props.book.id)} >Edit</button>
-                  <button>Delete</button>
+                  <button >Edit</button>
+                  <button onClick={() => props.handleDelete(props.book.id)}>Delete</button>
                </div >
 
                :

@@ -140,8 +140,6 @@ display: flex;
 height: 90vh;
  overflow: hidden;
  grid-column: 1/4;
-
-
 }
 .marquee span {
 text-align: center;

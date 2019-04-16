@@ -22,15 +22,13 @@ class UserSignIn extends Component {
 
   render() {
     return (
-      <div>
+      <div className="sign-in">
 
         <form className="ui large form" onChange={(event) => this.handleChange(event)} onSubmit={(event) => this.handleSubmit(event)} >
           <div className="field">
-            <label>Username:
-            <input name="username" type='text' placeholder="username" />
-            </label>
+            Username: <input name="username" type='text' placeholder="username" />
           </div>
-          <input className="ui submit button" type='submit' value="Submit" />
+          <input className="ui submit button" type='submit' value="Submit Username" />
         </form>
       </div >
     );
