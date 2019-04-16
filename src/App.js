@@ -25,7 +25,7 @@ class App extends Component {
          bookShowing: false,
          formShowing: false,
          displayedBook: null,
-         speed: 30
+         speed: 75
       }
       this.fetchingGrades = this.fetchingGrades.bind(this)
    };
