@@ -2,7 +2,6 @@
 .app-container {
    display: grid;
    grid-template-columns: 5% 1fr 5%;
-
 }
 
 .nav-bar {
@@ -14,14 +13,14 @@
    grid-column: 2;
    display: grid;
    grid-template-rows: repeat(5, 1fr);
-   min-height: 240vh;
 }
 
 .grade-container{
    display: grid;
-   grid-template-rows: 20% 70% 10%;
+   margin-bottom: 5%;
+   grid-template-rows: 20% 80%;
    grid-template-columns: 10% 1fr 10%;
-   min-height: 100%;
+
 }
 
 .my-books {
@@ -68,34 +67,69 @@
    grid-column: 2;
 }
 
+.book-cover-container{
+   min-width: 100%;
+   min-height: 100%;
+}
+
 .single-book{
+   display: flex;
    grid-row: 2;
    text-align: center;
-   max-height: 30%;
+   border: solid;
+   border-radius: 5%;
+   width: 20%;
+   height: 100%;
+   flex-direction: column;
+   justify-content: space-around;
 }
 
 .book-cover{
-   max-height: ;
+   display: flex;
    border-radius: 5%;
+   width: 60%;
+   align-self: center;
+   justify-content: center;
+   text-align: center;
+   grid-row: 2
 }
 
 .grade-title{
    grid-column: 1/4;
    text-align: center;
 }
-.back-button{
-   grid-column: 1;
-   grid-row: 2;
-}
 
-.forward-button{
-   grid-column: 3;
-   grid-row: 2;
-}
 
 .three-books{
    display: flex;
    grid-column: 2;
    grid-row: 2;
-   max-width: 100%
+   max-width: 100%;
+   justify-content: space-around;
+
+}
+
+.arrow-div-forward{
+   display: flex;
+   grid-row: 2;
+   grid-column: 3;
+   justify-content: center;
+   align-items: center;
+}
+
+.arrow-div-backward{
+   display: flex;
+   grid-row: 2;
+   grid-column: 1;
+   justify-content: center;
+   align-items: center;
+
+}
+
+.paragraph-container{
+   display: flex;
+   grid-column: 2;
+   height: 90vh;
+   justify-content: center;
+   align-items: center;
 }
