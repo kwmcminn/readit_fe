@@ -24,7 +24,8 @@ class App extends Component {
          user_id: "",
          bookShowing: false,
          formShowing: false,
-         displayedBook: null
+         displayedBook: null,
+         speed: 20
       }
       this.fetchingGrades = this.fetchingGrades.bind(this)
    };
@@ -156,7 +157,6 @@ class App extends Component {
 
 
    showBookDetails = book => {
-      console.log(book)
       this.setState({
          bookShowing: true,
          formShowing: false,
@@ -196,6 +196,18 @@ class App extends Component {
       }
    }
 
+   increaseSpeed = () => {
+         this.setState({
+            speed: this.state.speed*.8
+         })
+   }
+
+   decreaseSpeed = () => {
+         this.setState({
+            speed: this.state.speed*1.2
+         })
+   }
+
    render() {
       let currentDisplay;
       if (this.state.formShowing && this.state.bookShowing === false) {
@@ -203,9 +215,15 @@ class App extends Component {
       }
       else if (this.state.formShowing === false && this.state.bookShowing) {
 
-         currentDisplay = <div className='paragraph-container'>
-            <h1 className='paragraph-text'>{JSON.parse(this.state.displayedBook.paragraph)[0]}</h1>
-         </div>
+
+         currentDisplay =<div className='paragraph-show-div'>
+                           <button onClick={this.increaseSpeed}>Increase</button>
+                           <button onClick={this.decreaseSpeed}>Decrease</button>
+                           <div className='marquee'>
+                              <span id='scrolling-paragraph' style={{animation: `marquee linear ${this.state.speed}s infinite`}} >{this.state.displayedBook.paragraph}</span>
+                           </div>
+                        </div>
+
       }
       else {
          currentDisplay = <BooksContainer
@@ -238,13 +256,3 @@ class App extends Component {
 }
 
 export default App
-
-
-
-
-
-
-
-
-
-
