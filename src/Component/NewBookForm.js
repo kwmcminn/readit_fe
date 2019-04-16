@@ -7,7 +7,7 @@ class NewBookForm extends Component {
       title: "",
       paragraph: "",
       author: "",
-      grade: "",
+      grade_id: "",
       image: ""
     }
   }
@@ -20,7 +20,8 @@ class NewBookForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.makeNewBook(this.state.paragraph, this.state.author, this.state.grade, this.state.image, this.state.title)
+    console.log("new book props", this.state.grade_id)
+    this.props.makeNewBook(this.state.paragraph, this.state.author, this.state.grade_id, this.state.image, this.state.title)
   }
 
 
@@ -28,28 +29,28 @@ class NewBookForm extends Component {
     return (
       <div>
 
-        <form class="ui equal width form" onChange={this.handleChange} onSubmit={this.handleSubmit}>
-          <div class="field">
+        <form className="ui equal width form" onChange={this.handleChange} onSubmit={this.handleSubmit}>
+          <div className="field">
             <label>Poem Title:
             <input name="title" type='text' placeholder="Poem Title" />
             </label>
           </div>
 
-          <div class="field">
+          <div className="field">
             <label>Poem Image:
             <input name="image" type='text' placeholder="Paste your image URL" />
             </label>
           </div>
 
-          <div class="field">
+          <div className="field">
             <label>Poem Author:
              <input name="author" type='text' placeholder="Poem Author" />
             </label>
           </div>
 
-          <div class="field">
+          <div className="field">
             <label>Grade</label>
-            <select name="grade" class="ui fluid dropdown">
+            <select name="grade_id" className="ui fluid dropdown">
               <option value="">Grade</option>
               <option value="0">Kindergarten</option>
               <option value="1">First</option>
@@ -58,12 +59,12 @@ class NewBookForm extends Component {
             </select>
           </div>
 
-          <div class="field">
+          <div className="field">
             <label>Poem</label>
             <textarea name="paragraph" type='textarea' placeholder="Write your Poem" ></textarea>
           </div>
 
-          <div class="ui submit button">Submit</div>
+          <input className="ui submit button" type='submit' value="Submit" />
         </form >
       </div >
 

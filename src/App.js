@@ -21,7 +21,7 @@ class App extends Component {
          firstIndex: 0,
          secondIndex: 0,
          thirdIndex: 0,
-         user_id: ""
+         user_id: "",
          bookShowing: false,
          formShowing: false,
          displayedBook: null
@@ -40,11 +40,15 @@ class App extends Component {
    }
 
    fetchingGrades() {
+      let myId = parseInt(localStorage.getItem('user_id'))
+      let myBooks0 = this.state.books.filter(book => book.user_id === myId)
       let kindergarten0 = this.state.books.filter(book => book.grade.name === 'Kindergarten')
       let firstGrade1 = this.state.books.filter(book => book.grade.name.includes('First'))
       let secondGrade2 = this.state.books.filter(book => book.grade.name.includes('Second'))
       let thirdGrade3 = this.state.books.filter(book => book.grade.name.includes('Third'))
+      console.log("myId", myId)
       this.setState({
+         myBooks: myBooks0,
          kindergarten: kindergarten0,
          first: firstGrade1,
          second: secondGrade2,
@@ -52,14 +56,15 @@ class App extends Component {
       })
    }
 
-   // Creating a new booko and saving it to the db
+   // Creating a new book and saving it to the db
 
    makeNewBook = (paragraph, author, grade, image, title) => {
+      let newGrade = parseInt(grade)
       fetch(BOOKAPI, {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({
-            grade_id: grade,
+            grade_id: newGrade,
             title: title,
             image: image,
             paragraph: paragraph,
@@ -103,6 +108,53 @@ class App extends Component {
    }
 
 
+   handleDelete = (id) => {
+      fetch(`http://localhost:3000/books/${id}`,
+         {
+            method: 'DELETE',
+            headers: {
+               'Content-Type': 'application/json'
+            }
+         }).then((response) => {
+            return response.json();
+         }).then((json) => {
+            this.deleteBook(json.id)
+         })
+   }
+
+   deleteBook = (id) => {
+      let newBooks = this.state.books.filter((book) => book.id !== id)
+      this.setState({
+         myBooks: newBooks
+      })
+   }
+
+   handleUpdate(book) {
+      fetch(`http://localhost:3000/books/${book.id}`,
+         {
+            method: 'PUT',
+            body: JSON.stringify({ book: book }),
+            headers: {
+               'Content-Type': 'application/json'
+            }
+         }).then((response) => {
+            return response.json();
+         }).then((json) => {
+            this.updateBook(json)
+         })
+   }
+
+   updatebook(book) {
+      let newbooks = this.state.myBooks.filter((book) => book.id !== book.id)
+      newbooks.push(book)
+      this.setState({
+         myBooks: newbooks
+      })
+   }
+
+
+
+
    showBookDetails = book => {
       console.log(book)
       this.setState({
@@ -132,33 +184,34 @@ class App extends Component {
    }
 
    increaseIndex = (index) => {
-      let grade = index.slice(0,-5)
-      if (this.state[index] < this.state[grade].length - 1){
-         this.setState({[index]: this.state[index] + 1})
+      let grade = index.slice(0, -5)
+      if (this.state[index] < this.state[grade].length - 1) {
+         this.setState({ [index]: this.state[index] + 1 })
       }
    }
 
    decreaseIndex = (index) => {
-      let grade = index.slice(0,-5)
-      if (this.state[index] > 0){
-         this.setState({[index]: this.state[index] - 1})
+      if (this.state[index] > 0) {
+         this.setState({ [index]: this.state[index] - 1 })
       }
    }
 
    render() {
       let currentDisplay;
-      if(this.state.formShowing && this.state.bookShowing === false){
+      if (this.state.formShowing && this.state.bookShowing === false) {
          currentDisplay = <NewBookForm makeNewBook={this.makeNewBook} />
       }
       else if (this.state.formShowing === false && this.state.bookShowing) {
 
          currentDisplay = <div className='paragraph-container'>
-                           <h1 className='paragraph-text'>{JSON.parse(this.state.displayedBook.paragraph)[0]}</h1>
-                           </div>
+            <h1 className='paragraph-text'>{JSON.parse(this.state.displayedBook.paragraph)[0]}</h1>
+         </div>
       }
-      else{
+      else {
          currentDisplay = <BooksContainer
             books={this.state.books}
+            myBooks={this.state.myBooks}
+            myBooksIndex={this.state.myBooksIndex}
             kindergarten={this.state.kindergarten}
             kindergartenIndex={this.state.kindergartenIndex}
             first={this.state.first}
@@ -170,12 +223,14 @@ class App extends Component {
             increaseIndex={this.increaseIndex}
             decreaseIndex={this.decreaseIndex}
             showBookDetails={this.showBookDetails}
-            />
+            handleDelete={this.handleDelete}
+            handleUpdate={this.handleUpdate}
+         />
       }
 
       return (
          <div className='app-container'>
-            <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails}/>
+            <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
             {currentDisplay}
          </div>
       )
