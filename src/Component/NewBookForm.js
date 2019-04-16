@@ -12,7 +12,6 @@ class NewBookForm extends Component {
     }
   }
 
-
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -21,61 +20,59 @@ class NewBookForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log("about to post", this.state)
     this.props.makeNewBook(this.state.paragraph, this.state.author, this.state.grade, this.state.image, this.state.title)
-
-
-
   }
 
 
   render() {
     return (
       <div>
-        <h1>Create Your Own Poem!</h1>
-        <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
 
-          <p>
+        <form class="ui equal width form" onChange={this.handleChange} onSubmit={this.handleSubmit}>
+          <div class="field">
             <label>Poem Title:
             <input name="title" type='text' placeholder="Poem Title" />
             </label>
-          </p>
+          </div>
 
-          <p>
+          <div class="field">
             <label>Poem Image:
             <input name="image" type='text' placeholder="Paste your image URL" />
             </label>
-          </p>
+          </div>
 
-          <p>
-            <label>Poem Grade Level:
-            <input name="grade" type='text' placeholder="What Grade Level" />
-            </label>
-          </p>
-
-          <p>
+          <div class="field">
             <label>Poem Author:
-
-              <input name="author" type='text' placeholder="Poem Author" />
+             <input name="author" type='text' placeholder="Poem Author" />
             </label>
-          </p>
+          </div>
 
+          <div class="field">
+            <label>Grade</label>
+            <select name="grade" class="ui fluid dropdown">
+              <option value="">Grade</option>
+              <option value="0">Kindergarten</option>
+              <option value="1">First</option>
+              <option value="2">Second</option>
+              <option value="3">Third</option>
+            </select>
+          </div>
 
-          <label>Poem:
-            <p>
-              <textarea name="paragraph" type='textarea' placeholder="Write your Poem" />
-            </p>
-          </label>
+          <div class="field">
+            <label>Poem</label>
+            <textarea name="paragraph" type='textarea' placeholder="Write your Poem" ></textarea>
+          </div>
 
-
-          <p>
-            <input id='form-submit' type='submit' value='Submit' />
-          </p>
-
-        </form>
+          <div class="ui submit button">Submit</div>
+        </form >
       </div >
+
+
+
+
     );
   }
 }
 
 export default NewBookForm;
+
