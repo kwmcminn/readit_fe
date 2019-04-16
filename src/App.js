@@ -25,7 +25,7 @@ class App extends Component {
          bookShowing: false,
          formShowing: false,
          displayedBook: null,
-         speed: 20
+         speed: 30
       }
       this.fetchingGrades = this.fetchingGrades.bind(this)
    };
@@ -216,12 +216,14 @@ class App extends Component {
       else if (this.state.formShowing === false && this.state.bookShowing) {
 
 
-         currentDisplay =<div className='paragraph-show-div'>
-                           <button onClick={this.increaseSpeed}>Increase</button>
-                           <button onClick={this.decreaseSpeed}>Decrease</button>
-                           <div className='marquee'>
-                              <span id='scrolling-paragraph' style={{animation: `marquee linear ${this.state.speed}s infinite`}} >{this.state.displayedBook.paragraph}</span>
+         currentDisplay = <div className='paragraph-container'>
+                           <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
+                           <div className='paragraph-show-div'>
+                              <div className='marquee'>
+                                 <span id='scrolling-paragraph' style={{animation: `scroll-up ${this.state.speed}s linear infinite`}} >{this.state.displayedBook.paragraph}</span>
+                              </div>
                            </div>
+                           <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
                         </div>
 
       }
