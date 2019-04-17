@@ -6,6 +6,7 @@
 
 .nav-bar {
    grid-column: 1/4;
+   height: 5%
 }
 
 
@@ -233,5 +234,11 @@ position: relative;
 
 
 .book-form{
-   
+   width: 60%;
+}
+
+.form-container{
+   display: flex;
+   justify-content: center;
+   grid-column: 2;
 }

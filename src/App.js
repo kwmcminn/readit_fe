@@ -122,7 +122,8 @@ class App extends Component {
 
    toggleFormShowing = () => {
       this.setState({
-         formShowing: !this.state.formShowing
+         formShowing: false,
+         bookShowing: false
       })
    }
 
@@ -290,12 +291,14 @@ class App extends Component {
       else if (this.state.formShowing && this.state.bookShowing === false) {
          currentDisplay = <div className='app-container'>
             <MenuExampleEvenlyDivided toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
+            <div className='form-container'>
             <NewBookForm makeNewBook={this.makeNewBook} />
+            </div>
          </div>
       }
       else if (this.state.formShowing === false && this.state.bookShowing) {
          currentDisplay = <div className='app-container'>
-            <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
+            <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} toggleFormShowing={this.toggleFormShowing} />
             <div className='paragraph-container'>
                <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
                <div className='paragraph-show-div'>
@@ -308,7 +311,7 @@ class App extends Component {
          </div>
 
       }
-      else {
+      else if (this.state.formShowing === false && this.state.bookShowing === false){
          currentDisplay =
             <div className='app-container'>
                <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} currentDisplay={currentDisplay} />
