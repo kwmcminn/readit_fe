@@ -140,53 +140,6 @@
 /* Make it a marquee */
 .marquee {
 height: 90vh;
-<<<<<<< HEAD
- overflow: hidden;
- grid-column: 1/4;
-}
-.marquee span {
-text-align: center;
-white-space: nowrap;
- font-size: 4em;
- color: limegreen;
- width: 100%;
- margin: 0;
- line-height: 50px;
-align-self: center;
- /* Starting position */
- -moz-transform:translateX(100%);
- -webkit-transform:translateX(100%);
- transform:translateX(100%);
- /* Apply animation to this element */
- -moz-animation: marquee 15s linear infinite;
- -webkit-animation: marquee 15s linear infinite;
- animation: marquee 10s linear infinite;
-}
-/* Move it (define the animation) */
-@-moz-keyframes marquee {
- 0%   { -moz-transform: translateX(100%); }
- 100% { -moz-transform: translateX(-100%); }
-}
-@-webkit-keyframes marquee {
- 0%   { -webkit-transform: translateX(100%); }
- 100% { -webkit-transform: translateX(-100%); }
-}
-@keyframes marquee {
- 0%   {
- -moz-transform: translateX(100%); /* Firefox bug fix */
- -webkit-transform: translateX(100%); /* Firefox bug fix */
- transform: translateX(100%);
- }
- 100% {
- -moz-transform: translateX(-200%); /* Firefox bug fix */
- -webkit-transform: translateX(-200%); /* Firefox bug fix */
- transform: translateX(-200%);
- }
-}
-.paragraph-show-div{
-   grid-column: 1/4;
-}
-=======
 width: 80%;
 margin-left: 10%;
 overflow: hidden;
@@ -242,4 +195,6 @@ position: relative;
       grid-column: 3;
       height: 10%;
    }
->>>>>>> 380f0c15af04de3365ecdaa57f3b4d29209a33b4
+   .highlight {
+      background: yellow;
+    }

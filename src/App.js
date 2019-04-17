@@ -5,6 +5,7 @@ import BooksContainer from './Containers/BooksContainer'
 import NewBookForm from './Component/NewBookForm'
 import UserSignIn from './Component/UserSignIn';
 const BOOKAPI = `http://localhost:3000/books`
+const WORDAPI = `http://localhost:3000/words`
 
 class App extends Component {
    constructor() {
@@ -25,7 +26,12 @@ class App extends Component {
          bookShowing: false,
          formShowing: false,
          displayedBook: null,
-         speed: 30
+         speed: 30,
+         words: [],
+         kinWords: [],
+         firstWords: [],
+         secondWords: [],
+         thirdWords: []
       }
       this.fetchingGrades = this.fetchingGrades.bind(this)
    };
@@ -36,8 +42,37 @@ class App extends Component {
          .then(json => {
             this.setState({
                books: json
-            }, () => this.fetchingGrades())
+            }, () => this.grabWords())
          })
+
+
+   }
+
+   grabWords = () => {
+      this.fetchingGrades()
+      fetch(WORDAPI)
+         .then(response => {
+            return response.json()
+         })
+         .then(json => {
+            this.setState({
+               words: json
+            }, () => this.setWords())
+         })
+      console.log("what are words", this.state.words)
+   }
+
+   setWords = () => {
+      let kWords = this.state.words.filter(word => word.grade_id === 1)
+      let firstWords = this.state.words.filter(word => word.grade_id === 2)
+      let secondWords = this.state.words.filter(word => word.grade_id === 3)
+      let thirdWords = this.state.words.filter(word => word.grade_id === 4)
+      this.setState({
+         kinWords: kWords,
+         firstWords: firstWords,
+         secondWords: secondWords,
+         thirdWords: thirdWords
+      })
    }
 
    fetchingGrades() {
@@ -150,11 +185,24 @@ class App extends Component {
    }
 
    showBookDetails = book => {
+      let words
+      if (book.grade_id === 1) {
+         words = this.state.kinWords.word
+      } else if (book.grade_id === 2) {
+         words = this.state.firstWords.word
+      } else if (book.grade_id === 3) {
+         words = this.state.secondWords.word
+      } else if (book.grade_id === 3) {
+         words = this.state.thirdWords.word
+      }
       debugger
+      let product = book.paraph
+      const regexp = new RegExp(`\\b(${words.join('|')})\\b`, 'gi');
+      const html = product.replace(regexp, '<span class="highlight">$&</span>');
       this.setState({
          bookShowing: true,
          formShowing: false,
-         displayedBook: book
+         displayedBook: html
       })
    }
 
@@ -211,25 +259,15 @@ class App extends Component {
       else if (this.state.formShowing === false && this.state.bookShowing) {
 
 
-<<<<<<< HEAD
-         currentDisplay = <div className='paragraph-show-div'>
-            <button onClick={this.increaseSpeed}>Increase</button>
-            <button onClick={this.decreaseSpeed}>Decrease</button>
-            <div className='marquee'>
-               <span id='scrolling-paragraph' style={{ animation: `marquee linear ${this.state.speed}s infinite` }} >{this.state.displayedBook.paragraph}</span>
-            </div>
-         </div>
-=======
          currentDisplay = <div className='paragraph-container'>
-                           <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
-                           <div className='paragraph-show-div'>
-                              <div className='marquee'>
-                                 <span id='scrolling-paragraph' style={{animation: `scroll-up ${this.state.speed}s linear infinite`}} >{this.state.displayedBook.paragraph}</span>
-                              </div>
-                           </div>
-                           <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
-                        </div>
->>>>>>> 380f0c15af04de3365ecdaa57f3b4d29209a33b4
+            <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
+            <div className='paragraph-show-div'>
+               <div className='marquee'>
+                  <span id='scrolling-paragraph' style={{ animation: `scroll-up ${this.state.speed}s linear infinite` }} >{this.state.displayedBook.paragraph}</span>
+               </div>
+            </div>
+            <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
+         </div>
 
       }
       else {
@@ -264,3 +302,4 @@ class App extends Component {
 }
 
 export default App
+
