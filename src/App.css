@@ -196,6 +196,11 @@ position: relative;
       height: 10%;
    }
 
+   .highlight {
+      background: yellow;
+    }
+
+
 .sign-in{
    grid-column: 2;
    display: flex;
@@ -219,3 +224,4 @@ position: relative;
 #signin-logo{
    font-size: 10em;
 }
+
