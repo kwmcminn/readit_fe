@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class NewBookForm extends Component {
   constructor() {
     super()
@@ -10,7 +11,15 @@ class NewBookForm extends Component {
       grade_id: "",
       image: ""
     }
+
   }
+  canBeSubmitted() {
+    const { title, paragraph, image } = this.state;
+    return (
+      title != "" && paragraph != "" && image != ""
+    );
+  }
+
 
   handleChange = (event) => {
     this.setState({
@@ -19,15 +28,20 @@ class NewBookForm extends Component {
   }
 
   handleSubmit = (event) => {
-    event.preventDefault()
-    console.log("new book props", this.state.grade_id)
+    if (!this.canBeSubmitted()) {
+      event.preventDefault();
+      return;
+    }
     this.props.makeNewBook(this.state.paragraph, this.state.author, this.state.grade_id, this.state.image, this.state.title)
   }
 
 
   render() {
+
+    const isEnabled = this.canBeSubmitted();
     return (
-      <div>
+
+      <div className="book-form" >
 
         <form className="ui equal width form" onChange={(event) => this.handleChange(event)} onSubmit={(event) => this.handleSubmit(event)}>
           <div className="field">
@@ -57,6 +71,7 @@ class NewBookForm extends Component {
               <option value="3">Second</option>
               <option value="4">Third</option>
             </select>
+
           </div>
 
           <div className="field">
@@ -64,12 +79,10 @@ class NewBookForm extends Component {
             <textarea name="paragraph" type='textarea' placeholder="Write your Poem" ></textarea>
           </div>
 
-          <input className="ui submit button" type='submit' value="Submit" />
+          <button className="ui submit button" disabled={!isEnabled}>Submit</button>
+
         </form >
       </div >
-
-
-
 
     );
   }

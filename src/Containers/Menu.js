@@ -4,18 +4,21 @@ import { Menu } from 'semantic-ui-react'
 export default class MenuExampleEvenlyDivided extends Component {
   state = {}
 
-  handleItemClick = (e, { name }) =>
+  handlePoemClick = (e, { name }) =>
     this.setState({ activeItem: name }, () =>
       this.props.showFormDetails())
+
+  handleHomeClick = (e, { name }) =>
+    this.setState({ activeItem: name }, () =>
+      this.props.toggleFormShowing())
 
   render() {
     const { activeItem } = this.state
 
     return (
-      <Menu className='nav-bar' fluid widths={3}>
-        <Menu.Item name='New Poem' active={activeItem === 'New Poem'} onClick={this.handleItemClick} />
-        <Menu.Item name='sell' active={activeItem === 'sell'} onClick={this.handleItemClick} />
-        <Menu.Item name='rent' active={activeItem === 'rent'} onClick={this.handleItemClick} />
+      <Menu className='nav-bar' fluid widths={2}>
+        <Menu.Item name='Write Your Own Poem' active={activeItem === 'Write Your Own Poem'} onClick={this.handlePoemClick} />
+        <Menu.Item name='Go Home' active={activeItem === 'Go Home'} onClick={this.handleHomeClick} />
       </Menu>
     )
   }

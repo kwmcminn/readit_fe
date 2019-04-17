@@ -23,7 +23,7 @@ class UserSignIn extends Component {
   render() {
     return (
       <div className="sign-in">
-         <h1 id='signin-logo'>ReadIT</h1>
+        <h1 id='signin-logo'>ReadIT</h1>
         <form id='signin-form' className="ui large form" onChange={(event) => this.handleChange(event)} onSubmit={(event) => this.handleSubmit(event)} >
 
           <div className="field">

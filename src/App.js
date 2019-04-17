@@ -46,8 +46,6 @@ class App extends Component {
                books: json
             }, () => this.grabWords())
          })
-
-
    }
 
    grabWords = () => {
@@ -61,7 +59,6 @@ class App extends Component {
                words: json
             }, () => this.setWords())
          })
-      console.log("what are words", this.state.words)
    }
 
    setWords = () => {
@@ -112,7 +109,6 @@ class App extends Component {
       }).then((response) => {
          return response.json();
       }).then((json) => {
-         console.log("new Poem Json", json)
          let newPoem = json
          let test = [...this.state.myBooks, newPoem]
          console.log("testing adding mybook", test)
@@ -124,6 +120,11 @@ class App extends Component {
       }))
    }
 
+   toggleFormShowing = () => {
+      this.setState({
+         formShowing: !this.state.formShowing
+      })
+   }
 
    //Creating a new user
 
@@ -159,7 +160,7 @@ class App extends Component {
    }
 
    deleteBook = (id) => {
-      let newBooks = this.state.books.filter((book) => book.id !== id)
+      let newBooks = this.state.myBooks.filter((book) => book.id !== id)
       this.setState({
          myBooks: newBooks
       })
@@ -178,7 +179,7 @@ class App extends Component {
          })
    }
 
-   updatebook(book) {
+   updateBook(book) {
       let newbooks = this.state.myBooks.filter((book) => book.id !== book.id)
       newbooks.push(book)
       this.setState({
@@ -203,6 +204,7 @@ class App extends Component {
       }
       sightWords = this.getSightWords(words, book.paragraph)
       product = book.paragraph
+      this.speak(product)
       regexp = new RegExp(`\\b(${words.join('|')})\\b`, 'gi');
       html = product.replace(regexp, '<span class="highlight">$&</span>')
       this.setState({
@@ -216,8 +218,8 @@ class App extends Component {
    getSightWords = (sightWords, paragraph) => {
       let paraArray = paragraph.split(' ')
       let paragraphSightWords = []
-      for(let i=0; i < paraArray.length; i++){
-         if (sightWords.includes(paraArray[i])){
+      for (let i = 0; i < paraArray.length; i++) {
+         if (sightWords.includes(paraArray[i])) {
             paragraphSightWords.push(paraArray[i])
          }
       }
@@ -269,58 +271,66 @@ class App extends Component {
       })
    }
 
+   speak = (message) => {
+      let msg = new SpeechSynthesisUtterance(message)
+      let voices = window.speechSynthesis.getVoices()
+      msg.voice = voices[0]
+      msg.rate = .99;
+      window.speechSynthesis.speak(msg)
+   }
+
    render() {
 
       let currentDisplay;
-      if(this.state.user_id === ""){
-         currentDisplay =  <div className='app-container login-background'>
-                              <UserSignIn createUser={this.createUser}/>
-                           </div>
+      if (this.state.user_id === "") {
+         currentDisplay = <div className='app-container login-background'>
+            <UserSignIn createUser={this.createUser} />
+         </div>
       }
       else if (this.state.formShowing && this.state.bookShowing === false) {
          currentDisplay = <div className='app-container'>
-                           <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
-                           <NewBookForm makeNewBook={this.makeNewBook} />
-                           </div>
+            <MenuExampleEvenlyDivided toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
+            <NewBookForm makeNewBook={this.makeNewBook} />
+         </div>
       }
       else if (this.state.formShowing === false && this.state.bookShowing) {
-         currentDisplay =<div className='app-container'>
-                           <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
-                           <div className='paragraph-container'>
-                              <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
-                              <div className='paragraph-show-div'>
-                                 <div className='marquee'>
-                                    <span id='scrolling-paragraph' style={{animation: `scroll-up ${this.state.speed}s linear infinite`}} >{ReactHtmlParser(this.state.displayedBook)}</span>
-                                 </div>
-                              </div>
-                              <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
-                           </div>
-                     </div>
+         currentDisplay = <div className='app-container'>
+            <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
+            <div className='paragraph-container'>
+               <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
+               <div className='paragraph-show-div'>
+                  <div className='marquee'>
+                     <span id='scrolling-paragraph' style={{ animation: `scroll-up ${this.state.speed}s linear infinite` }} >{ReactHtmlParser(this.state.displayedBook)}</span>
+                  </div>
+               </div>
+               <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
+            </div>
+         </div>
 
       }
       else {
          currentDisplay =
-                           <div className='app-container'>
-                              <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
-                                    <BooksContainer
-                                       books={this.state.books}
-                                       myBooks={this.state.myBooks}
-                                       myBooksIndex={this.state.myBooksIndex}
-                                       kindergarten={this.state.kindergarten}
-                                       kindergartenIndex={this.state.kindergartenIndex}
-                                       first={this.state.first}
-                                       firstIndex={this.state.firstIndex}
-                                       second={this.state.second}
-                                       secondIndex={this.state.secondIndex}
-                                       third={this.state.third}
-                                       thirdIndex={this.state.thirdIndex}
-                                       increaseIndex={this.increaseIndex}
-                                       decreaseIndex={this.decreaseIndex}
-                                       showBookDetails={this.showBookDetails}
-                                       handleDelete={this.handleDelete}
-                                       handleUpdate={this.handleUpdate}
-                                    />
-                                 </div>
+            <div className='app-container'>
+               <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} currentDisplay={currentDisplay} />
+               <BooksContainer
+                  books={this.state.books}
+                  myBooks={this.state.myBooks}
+                  myBooksIndex={this.state.myBooksIndex}
+                  kindergarten={this.state.kindergarten}
+                  kindergartenIndex={this.state.kindergartenIndex}
+                  first={this.state.first}
+                  firstIndex={this.state.firstIndex}
+                  second={this.state.second}
+                  secondIndex={this.state.secondIndex}
+                  third={this.state.third}
+                  thirdIndex={this.state.thirdIndex}
+                  increaseIndex={this.increaseIndex}
+                  decreaseIndex={this.decreaseIndex}
+                  showBookDetails={this.showBookDetails}
+                  handleDelete={this.handleDelete}
+                  handleUpdate={this.handleUpdate}
+               />
+            </div>
       }
 
       return (
