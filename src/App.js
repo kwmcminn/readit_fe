@@ -5,6 +5,7 @@ import MenuExampleEvenlyDivided from './Containers/Menu'
 import BooksContainer from './Containers/BooksContainer'
 import NewBookForm from './Component/NewBookForm'
 import UserSignIn from './Component/UserSignIn';
+import EditBook from './Component/EditBook';
 const BOOKAPI = `http://localhost:3000/books`
 const WORDAPI = `http://localhost:3000/words`
 
@@ -26,6 +27,7 @@ class App extends Component {
          user_id: "",
          bookShowing: false,
          formShowing: false,
+         editFormShowing: false,
          displayedBook: null,
          words: [],
          kinWords: [],
@@ -33,7 +35,9 @@ class App extends Component {
          secondWords: [],
          thirdWords: [],
          speed: 75,
-         displayedSightWords: []
+         displayedSightWords: [],
+         editBook: [],
+         myId: parseInt(localStorage.getItem('user_id'))
       }
       this.fetchingGrades = this.fetchingGrades.bind(this)
    };
@@ -75,13 +79,11 @@ class App extends Component {
    }
 
    fetchingGrades() {
-      let myId = parseInt(localStorage.getItem('user_id'))
-      let myBooks0 = this.state.books.filter(book => book.user_id === myId)
+      let myBooks0 = this.state.books.filter(book => book.user_id === this.state.myId)
       let kindergarten0 = this.state.books.filter(book => book.grade.name === 'Kindergarten')
       let firstGrade1 = this.state.books.filter(book => book.grade.name.includes('First'))
       let secondGrade2 = this.state.books.filter(book => book.grade.name.includes('Second'))
       let thirdGrade3 = this.state.books.filter(book => book.grade.name.includes('Third'))
-      console.log("myId", myId)
       this.setState({
          myBooks: myBooks0,
          kindergarten: kindergarten0,
@@ -110,8 +112,6 @@ class App extends Component {
          return response.json();
       }).then((json) => {
          let newPoem = json
-         let test = [...this.state.myBooks, newPoem]
-         console.log("testing adding mybook", test)
          this.setState({
             myBooks: [...this.state.myBooks, newPoem]
          })
@@ -167,7 +167,8 @@ class App extends Component {
       })
    }
 
-   handleUpdate(book) {
+   handleUpdate = (book) => {
+      console.log("this is the book", book)
       fetch(`http://localhost:3000/books/${book.id}`,
          {
             method: 'PUT',
@@ -180,11 +181,13 @@ class App extends Component {
          })
    }
 
-   updateBook(book) {
-      let newbooks = this.state.myBooks.filter((book) => book.id !== book.id)
-      newbooks.push(book)
+   updateBook = (newBook) => {
+      this.componentDidMount()
+      let newbooks = this.state.books.filter((book) => book.id === newBook.id)
       this.setState({
-         myBooks: newbooks
+         myBooks: newbooks,
+         editFormShowing: false,
+         formShowing: false
       })
    }
 
@@ -200,7 +203,7 @@ class App extends Component {
          words = this.state.firstWords
       } else if (book.grade_id === 3) {
          words = this.state.secondWords
-      } else if (book.grade_id === 3) {
+      } else if (book.grade_id === 4) {
          words = this.state.thirdWords
       }
       sightWords = this.getSightWords(words, book.paragraph)
@@ -280,6 +283,14 @@ class App extends Component {
       window.speechSynthesis.speak(msg)
    }
 
+   showEdit = (book) => {
+      this.setState({
+         editFormShowing: true,
+         editBook: book
+      })
+
+   }
+
    render() {
 
       let currentDisplay;
@@ -292,7 +303,7 @@ class App extends Component {
          currentDisplay = <div className='app-container'>
             <MenuExampleEvenlyDivided toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
             <div className='form-container'>
-            <NewBookForm makeNewBook={this.makeNewBook} />
+               <NewBookForm makeNewBook={this.makeNewBook} />
             </div>
          </div>
       }
@@ -311,7 +322,16 @@ class App extends Component {
          </div>
 
       }
-      else if (this.state.formShowing === false && this.state.bookShowing === false){
+      else if (this.state.formShowing === false && this.state.bookShowing === false && this.state.editFormShowing) {
+         currentDisplay = <div className='app-container'>
+            <MenuExampleEvenlyDivided toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
+            <div className='form-container'>
+               <EditBook book={this.state.editBook} handleUpdate={this.handleUpdate} />
+
+            </div>
+         </div>
+      }
+      else if (this.state.formShowing === false && this.state.bookShowing === false) {
          currentDisplay =
             <div className='app-container'>
                <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} currentDisplay={currentDisplay} />
@@ -331,7 +351,7 @@ class App extends Component {
                   decreaseIndex={this.decreaseIndex}
                   showBookDetails={this.showBookDetails}
                   handleDelete={this.handleDelete}
-                  handleUpdate={this.handleUpdate}
+                  showEdit={this.showEdit}
                />
             </div>
       }

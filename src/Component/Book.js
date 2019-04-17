@@ -1,4 +1,5 @@
 import React from 'react';
+import EditBook from './EditBook'
 
 const Book = props => {
    return (
@@ -11,7 +12,7 @@ const Book = props => {
 
                   <img alt="" className='book-cover' src={props.book.image} onClick={() => props.showBookDetails(props.book)} />
                   <h5 className='author'> Author Goes Here </h5>
-                  <button >Edit</button>
+                  <button onClick={() => props.showEdit(props.book)}>Edit</button>
                   <button onClick={() => props.handleDelete(props.book.id)}>Delete</button>
                </div >
 

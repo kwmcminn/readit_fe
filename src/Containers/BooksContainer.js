@@ -14,7 +14,7 @@ class BooksContainer extends Component {
                <h1 className='grade-title'>My Poems</h1>
                <div className='three-books'>
                   {this.props.myBooks.slice(this.props.myBooksIndex, this.props.myBooksIndex + 3).map((book) => {
-                     return <Book book={book} showBookDetails={this.props.showBookDetails} handleUpdate={this.props.handleUpdate} handleDelete={this.props.handleDelete} />
+                     return <Book book={book} showBookDetails={this.props.showBookDetails} showEdit={this.props.showEdit} handleDelete={this.props.handleDelete} />
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('myBooksIndex')}>
@@ -28,7 +28,7 @@ class BooksContainer extends Component {
                <h1 className='grade-title'>Kindergarten</h1>
                <div className='three-books'>
                   {this.props.kindergarten.slice(this.props.kindergartenIndex, this.props.kindergartenIndex + 3).map((book) => {
-                     return <Book book={book} showBookDetails={this.props.showBookDetails} />
+                     return <Book book={book} showBookDetails={this.props.showBookDetails} showEdit={this.props.showEdit} />
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('kindergartenIndex')}>
@@ -42,7 +42,7 @@ class BooksContainer extends Component {
                <h1 className='grade-title'>First Grade</h1>
                <div className='three-books'>
                   {this.props.first.slice(this.props.firstIndex, this.props.firstIndex + 3).map((book) => {
-                     return <Book book={book} showBookDetails={this.props.showBookDetails} />
+                     return <Book book={book} showBookDetails={this.props.showBookDetails} showEdit={this.props.showEdit} />
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('firstIndex')}>
@@ -56,7 +56,7 @@ class BooksContainer extends Component {
                <h1 className='grade-title'>Second Grade</h1>
                <div className='three-books'>
                   {this.props.second.slice(this.props.secondIndex, this.props.secondIndex + 3).map((book) => {
-                     return <Book book={book} showBookDetails={this.props.showBookDetails} />
+                     return <Book book={book} showBookDetails={this.props.showBookDetails} showEdit={this.props.showEdit} />
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('secondIndex')}>
@@ -70,7 +70,7 @@ class BooksContainer extends Component {
                <h1 className='grade-title'>Third Grade</h1>
                <div className='three-books'>
                   {this.props.third.slice(this.props.thirdIndex, this.props.thirdIndex + 3).map((book) => {
-                     return <Book book={book} showBookDetails={this.props.showBookDetails} />
+                     return <Book book={book} showBookDetails={this.props.showBookDetails} showEdit={this.props.showEdit} />
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('thirdIndex')}>
