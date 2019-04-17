@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import './App.css';
 import MenuExampleEvenlyDivided from './Containers/Menu'
 import BooksContainer from './Containers/BooksContainer'
@@ -31,7 +32,8 @@ class App extends Component {
          firstWords: [],
          secondWords: [],
          thirdWords: [],
-         speed: 75
+         speed: 75,
+         displayedSightWords: []
       }
       this.fetchingGrades = this.fetchingGrades.bind(this)
    };
@@ -185,7 +187,11 @@ class App extends Component {
    }
 
    showBookDetails = book => {
-      let words
+      let words;
+      let regexp;
+      let html;
+      let product;
+      let sightWords
       if (book.grade_id === 1) {
          words = this.state.kinWords
       } else if (book.grade_id === 2) {
@@ -195,15 +201,28 @@ class App extends Component {
       } else if (book.grade_id === 3) {
          words = this.state.thirdWords
       }
-      debugger
-      let product = book.paragraph
-      const regexp = new RegExp(`\\b(${words.join('|')})\\b`, 'gi');
-      const html = product.replace(regexp, '<span class="highlight">$&</span>');
+      sightWords = this.getSightWords(words, book.paragraph)
+      product = book.paragraph
+      regexp = new RegExp(`\\b(${words.join('|')})\\b`, 'gi');
+      html = product.replace(regexp, '<span class="highlight">$&</span>')
       this.setState({
          bookShowing: true,
          formShowing: false,
-         displayedBook: html
+         displayedBook: html,
+         displayedSightWords: sightWords
       })
+   }
+
+   getSightWords = (sightWords, paragraph) => {
+      let paraArray = paragraph.split(' ')
+      let paragraphSightWords = []
+      for(let i=0; i < paraArray.length; i++){
+         if (sightWords.includes(paraArray[i])){
+            paragraphSightWords.push(paraArray[i])
+         }
+      }
+      let uniqSightWords = [...new Set(paragraphSightWords)]
+      return uniqSightWords
    }
 
    showFormDetails = () => {
@@ -271,7 +290,7 @@ class App extends Component {
                               <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
                               <div className='paragraph-show-div'>
                                  <div className='marquee'>
-                                    <span id='scrolling-paragraph' style={{animation: `scroll-up ${this.state.speed}s linear infinite`}} >{this.state.displayedBook.paragraph}</span>
+                                    <span id='scrolling-paragraph' style={{animation: `scroll-up ${this.state.speed}s linear infinite`}} >{ReactHtmlParser(this.state.displayedBook)}</span>
                                  </div>
                               </div>
                               <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>

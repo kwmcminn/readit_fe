@@ -146,7 +146,7 @@ overflow: hidden;
 position: relative;
 }
 
-.marquee span  {
+.marquee > span  {
    white-space: pre-wrap;
     position: absolute;
     width: 100%;
@@ -197,7 +197,8 @@ position: relative;
    }
 
    .highlight {
-      background: yellow;
+      color: blue;
+      font-weight: bold;
     }
 
 
@@ -224,4 +225,3 @@ position: relative;
 #signin-logo{
    font-size: 10em;
 }
-
