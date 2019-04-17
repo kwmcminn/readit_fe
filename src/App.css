@@ -1,7 +1,7 @@
-
 .app-container {
    display: grid;
    grid-template-columns: 5% 1fr 5%;
+   height: 100vh;
 }
 
 .nav-bar {
@@ -167,11 +167,11 @@ position: relative;
    /* Move it (define the animation) */
    @-moz-keyframes scroll-up {
     0%   { -moz-transform: translateY(100%); }
-    100% { -moz-transform: translateY(-100%); }
+    100% { -moz-transform: translateY(-400%); }
    }
    @-webkit-keyframes scroll-up {
     0%   { -webkit-transform: translateY(100%); }
-    100% { -webkit-transform: translateY(-100%); }
+    100% { -webkit-transform: translateY(-400%); }
    }
    @keyframes scroll-up {
     0%   {
@@ -180,9 +180,9 @@ position: relative;
     transform: translateY(100%);
     }
     100% {
-    -moz-transform: translateY(-100%); /* Browser bug fix */
-    -webkit-transform: translateY(-100%); /* Browser bug fix */
-    transform: translateY(-100%);
+    -moz-transform: translateY(-400%); /* Browser bug fix */
+    -webkit-transform: translateY(-400%); /* Browser bug fix */
+    transform: translateY(-400%);
     }
    }
 
@@ -195,6 +195,33 @@ position: relative;
       grid-column: 3;
       height: 10%;
    }
+
    .highlight {
       background: yellow;
     }
+
+
+.sign-in{
+   grid-column: 2;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+#signin-form{
+   width: 50%
+}
+
+#signin-submit-button{
+   margin-left: 40%;
+}
+
+.login-background{
+   background-color: rgb(29, 161, 242) ;
+}
+
+#signin-logo{
+   font-size: 10em;
+}
+
