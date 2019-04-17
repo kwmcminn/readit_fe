@@ -84,6 +84,11 @@
    justify-content: space-around;
 }
 
+.single-book:hover {
+   transform: scale(1.2);
+   background-color: rgb(29, 161, 242);
+}
+
 .book-cover{
    display: flex;
    border-radius: 5%;
