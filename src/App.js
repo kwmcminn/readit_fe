@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import './App.css';
+import './index.css';
 import MenuExampleEvenlyDivided from './Containers/Menu'
 import BooksContainer from './Containers/BooksContainer'
 import NewBookForm from './Component/NewBookForm'
@@ -34,10 +35,11 @@ class App extends Component {
          firstWords: [],
          secondWords: [],
          thirdWords: [],
-         speed: 75,
-         displayedSightWords: [],
          editBook: [],
          myId: parseInt(localStorage.getItem('user_id'))
+         speed: 500,
+         displayedSightWords: [],
+         userLoggedIn: false
       }
       this.fetchingGrades = this.fetchingGrades.bind(this)
    };
@@ -142,7 +144,8 @@ class App extends Component {
          localStorage.setItem('user_id', json.id);
          let newid = localStorage.getItem('user_id')
          this.setState({
-            user_id: newid
+            user_id: newid,
+            userLoggedIn: true
          })
       });
    }
@@ -275,6 +278,15 @@ class App extends Component {
       })
    }
 
+   handleLogOutClick = () => {
+      localStorage.clear();
+      this.setState({
+         formShowing: false,
+         bookShowing: false,
+         userLoggedIn: false
+      })
+   }
+
    speak = (message) => {
       let msg = new SpeechSynthesisUtterance(message)
       let voices = window.speechSynthesis.getVoices()
@@ -294,30 +306,34 @@ class App extends Component {
    render() {
 
       let currentDisplay;
-      if (this.state.user_id === "") {
+      if (localStorage.length === 0) {
          currentDisplay = <div className='app-container login-background'>
             <UserSignIn createUser={this.createUser} />
          </div>
       }
       else if (this.state.formShowing && this.state.bookShowing === false) {
          currentDisplay = <div className='app-container'>
-            <MenuExampleEvenlyDivided toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
+            <MenuExampleEvenlyDivided handleLogOutClick= {this.handleLogOutClick} toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
             <div className='form-container'>
                <NewBookForm makeNewBook={this.makeNewBook} />
             </div>
          </div>
       }
       else if (this.state.formShowing === false && this.state.bookShowing) {
-         currentDisplay = <div className='app-container'>
-            <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} toggleFormShowing={this.toggleFormShowing} />
+         currentDisplay = <div className='app-container cool-background'>
+            <MenuExampleEvenlyDivided handleLogOutClick= {this.handleLogOutClick} showFormDetails={this.showFormDetails} toggleFormShowing={this.toggleFormShowing} />
             <div className='paragraph-container'>
-               <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
+               <span>Site Words</span>
+               <div className='speed-container'>
+                  <img id='bird-picture' src="https://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Cartoons-PNG/Large_Blue_Bird_PNG_Cartoon_Clipart.png?m=1434276645" />
+                  <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
+                  <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
+               </div>
                <div className='paragraph-show-div'>
                   <div className='marquee'>
                      <span id='scrolling-paragraph' style={{ animation: `scroll-up ${this.state.speed}s linear infinite` }} >{ReactHtmlParser(this.state.displayedBook)}</span>
                   </div>
                </div>
-               <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
             </div>
          </div>
 
@@ -334,7 +350,7 @@ class App extends Component {
       else if (this.state.formShowing === false && this.state.bookShowing === false) {
          currentDisplay =
             <div className='app-container'>
-               <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} currentDisplay={currentDisplay} />
+               <MenuExampleEvenlyDivided handleLogOutClick= {this.handleLogOutClick} showFormDetails={this.showFormDetails} currentDisplay={currentDisplay} />
                <BooksContainer
                   books={this.state.books}
                   myBooks={this.state.myBooks}
