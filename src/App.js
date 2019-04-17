@@ -150,7 +150,6 @@ class App extends Component {
    }
 
    showBookDetails = book => {
-      debugger
       this.setState({
          bookShowing: true,
          formShowing: false,
@@ -205,58 +204,60 @@ class App extends Component {
    render() {
 
       let currentDisplay;
-      if (this.state.formShowing && this.state.bookShowing === false) {
-         currentDisplay = <NewBookForm makeNewBook={this.makeNewBook} />
+      if(this.state.user_id === ""){
+         currentDisplay =  <div className='app-container login-background'>
+                              <UserSignIn createUser={this.createUser}/>
+                           </div>
+      }
+      else if (this.state.formShowing && this.state.bookShowing === false) {
+         currentDisplay = <div className='app-container'>
+                           <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
+                           <NewBookForm makeNewBook={this.makeNewBook} />
+                           </div>
       }
       else if (this.state.formShowing === false && this.state.bookShowing) {
-
-
-<<<<<<< HEAD
-         currentDisplay = <div className='paragraph-show-div'>
-            <button onClick={this.increaseSpeed}>Increase</button>
-            <button onClick={this.decreaseSpeed}>Decrease</button>
-            <div className='marquee'>
-               <span id='scrolling-paragraph' style={{ animation: `marquee linear ${this.state.speed}s infinite` }} >{this.state.displayedBook.paragraph}</span>
-            </div>
-         </div>
-=======
-         currentDisplay = <div className='paragraph-container'>
-                           <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
-                           <div className='paragraph-show-div'>
-                              <div className='marquee'>
-                                 <span id='scrolling-paragraph' style={{animation: `scroll-up ${this.state.speed}s linear infinite`}} >{this.state.displayedBook.paragraph}</span>
+         currentDisplay =<div className='app-container'>
+                           <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
+                           <div className='paragraph-container'>
+                              <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
+                              <div className='paragraph-show-div'>
+                                 <div className='marquee'>
+                                    <span id='scrolling-paragraph' style={{animation: `scroll-up ${this.state.speed}s linear infinite`}} >{this.state.displayedBook.paragraph}</span>
+                                 </div>
                               </div>
+                              <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
                            </div>
-                           <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
-                        </div>
->>>>>>> 380f0c15af04de3365ecdaa57f3b4d29209a33b4
+                     </div>
+
 
       }
       else {
-         currentDisplay = <BooksContainer
-            books={this.state.books}
-            myBooks={this.state.myBooks}
-            myBooksIndex={this.state.myBooksIndex}
-            kindergarten={this.state.kindergarten}
-            kindergartenIndex={this.state.kindergartenIndex}
-            first={this.state.first}
-            firstIndex={this.state.firstIndex}
-            second={this.state.second}
-            secondIndex={this.state.secondIndex}
-            third={this.state.third}
-            thirdIndex={this.state.thirdIndex}
-            increaseIndex={this.increaseIndex}
-            decreaseIndex={this.decreaseIndex}
-            showBookDetails={this.showBookDetails}
-            handleDelete={this.handleDelete}
-            handleUpdate={this.handleUpdate}
-         />
+         currentDisplay =
+                           <div className='app-container'>
+                              <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
+                                    <BooksContainer
+                                       books={this.state.books}
+                                       myBooks={this.state.myBooks}
+                                       myBooksIndex={this.state.myBooksIndex}
+                                       kindergarten={this.state.kindergarten}
+                                       kindergartenIndex={this.state.kindergartenIndex}
+                                       first={this.state.first}
+                                       firstIndex={this.state.firstIndex}
+                                       second={this.state.second}
+                                       secondIndex={this.state.secondIndex}
+                                       third={this.state.third}
+                                       thirdIndex={this.state.thirdIndex}
+                                       increaseIndex={this.increaseIndex}
+                                       decreaseIndex={this.decreaseIndex}
+                                       showBookDetails={this.showBookDetails}
+                                       handleDelete={this.handleDelete}
+                                       handleUpdate={this.handleUpdate}
+                                    />
+                                 </div>
       }
 
       return (
-         <div className='app-container'>
-            <UserSignIn createUser={this.createUser} />
-            <MenuExampleEvenlyDivided showFormDetails={this.showFormDetails} />
+         <div>
             {currentDisplay}
          </div>
       )
