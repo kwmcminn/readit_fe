@@ -30,7 +30,7 @@ class App extends Component {
          kinWords: [],
          firstWords: [],
          secondWords: [],
-         thirdWords: []
+         thirdWords: [],
          speed: 75
       }
       this.fetchingGrades = this.fetchingGrades.bind(this)
@@ -68,10 +68,10 @@ class App extends Component {
       let secondWords = this.state.words.filter(word => word.grade_id === 3)
       let thirdWords = this.state.words.filter(word => word.grade_id === 4)
       this.setState({
-         kinWords: kWords,
-         firstWords: firstWords,
-         secondWords: secondWords,
-         thirdWords: thirdWords
+         kinWords: JSON.parse(kWords[0].word),
+         firstWords: JSON.parse(firstWords[0].word),
+         secondWords: JSON.parse(secondWords[0].word),
+         thirdWords: JSON.parse(thirdWords[0].word)
       })
    }
 
@@ -187,16 +187,16 @@ class App extends Component {
    showBookDetails = book => {
       let words
       if (book.grade_id === 1) {
-         words = this.state.kinWords.word
+         words = this.state.kinWords
       } else if (book.grade_id === 2) {
-         words = this.state.firstWords.word
+         words = this.state.firstWords
       } else if (book.grade_id === 3) {
-         words = this.state.secondWords.word
+         words = this.state.secondWords
       } else if (book.grade_id === 3) {
-         words = this.state.thirdWords.word
+         words = this.state.thirdWords
       }
       debugger
-      let product = book.paraph
+      let product = book.paragraph
       const regexp = new RegExp(`\\b(${words.join('|')})\\b`, 'gi');
       const html = product.replace(regexp, '<span class="highlight">$&</span>');
       this.setState({
@@ -313,4 +313,3 @@ class App extends Component {
 }
 
 export default App
-
