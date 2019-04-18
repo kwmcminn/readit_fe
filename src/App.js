@@ -295,7 +295,7 @@ class App extends Component {
    sayWord = (message) => {
       let msg = new SpeechSynthesisUtterance(message)
       let voices = window.speechSynthesis.getVoices()
-      msg.voice = voices[0]
+      msg.voice = voices[32]
       msg.rate = .99;
       window.speechSynthesis.speak(msg)
    }
