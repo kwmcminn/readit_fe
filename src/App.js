@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser';
 import './App.css';
 import './index.css';
@@ -9,8 +10,11 @@ import Paragraph from './Component/Paragraph';
 import Sightword from './Component/Sightword';
 import UserSignIn from './Component/UserSignIn';
 import EditBook from './Component/EditBook';
+import AboutUs from './Component/AboutUs';
+
 import bird from './imgs/bird.png'
 import flower from  './imgs/flower.png'
+
 const BOOKAPI = `http://localhost:3000/books`
 const WORDAPI = `http://localhost:3000/words`
 
@@ -99,6 +103,8 @@ class App extends Component {
       })
    }
 
+
+
    // Creating a new book and saving it to the db
 
    makeNewBook = (paragraph, author, grade, image, title) => {
@@ -115,6 +121,7 @@ class App extends Component {
             user_id: localStorage.getItem('user_id')
          })
       }).then((response) => {
+         this.fetchingGrades()
          return response.json();
       }).then((json) => {
          let newPoem = json
@@ -128,13 +135,21 @@ class App extends Component {
 
    toggleFormShowing = () => {
       this.setState({
+         editFormShowing: false,
          formShowing: false,
+         bookShowing: false,
+      })
+   }
+
+   showFormDetails = () => {
+      this.setState({
+         formShowing: true,
+         editFormShowing: false,
          bookShowing: false
       })
    }
 
    //Creating a new user
-
    createUser = (data) => {
       fetch(`http://localhost:3000/users`, {
          method: 'POST',
@@ -150,10 +165,9 @@ class App extends Component {
          this.setState({
             user_id: newid,
             userLoggedIn: true
-         })
+         }, () => window.location.reload())
       });
    }
-
 
    handleDelete = (id) => {
       fetch(`http://localhost:3000/books/${id}`,
@@ -169,8 +183,16 @@ class App extends Component {
 
    deleteBook = (id) => {
       let newBooks = this.state.myBooks.filter((book) => book.id !== id)
+      let kin = this.state.kindergarten.filter((book) => book.id !== id)
+      let fir = this.state.first.filter((book) => book.id !== id)
+      let sec = this.state.second.filter((book) => book.id !== id)
+      let thi = this.state.third.filter((book) => book.id !== id)
       this.setState({
-         myBooks: newBooks
+         myBooks: newBooks,
+         kindergarten: kin,
+         first: fir,
+         second: sec,
+         third: thi
       })
    }
 
@@ -194,10 +216,11 @@ class App extends Component {
       this.setState({
          myBooks: newbooks,
          editFormShowing: false,
-         formShowing: false
+         formShowing: false,
+         bookShowing: false
+
       })
    }
-
    showBookDetails = book => {
       let words;
       let regexp;
@@ -221,6 +244,7 @@ class App extends Component {
       this.setState({
          bookShowing: true,
          formShowing: false,
+         editFormShowing: false,
          displayedBook: splitArray,
          displayedSightWords: sightWords
       })
@@ -238,12 +262,6 @@ class App extends Component {
       return uniqSightWords
    }
 
-   showFormDetails = () => {
-      this.setState({
-         formShowing: true,
-         bookShowing: false
-      })
-   }
 
    nextBooks = () => {
       this.setState({
@@ -288,7 +306,7 @@ class App extends Component {
          formShowing: false,
          bookShowing: false,
          userLoggedIn: false
-      })
+      }, () => window.location.reload())
    }
 
 
@@ -305,28 +323,26 @@ class App extends Component {
          editFormShowing: true,
          editBook: book
       })
-
    }
 
    render() {
-
       let currentDisplay;
       if (localStorage.length === 0) {
          currentDisplay = <div className='app-container login-background'>
             <UserSignIn createUser={this.createUser} />
          </div>
       }
-      else if (this.state.formShowing && this.state.bookShowing === false) {
+      else if (this.state.formShowing && this.state.bookShowing === false && this.state.editFormShowing === false) {
          currentDisplay = <div className='app-container'>
-            <MenuExampleEvenlyDivided handleLogOutClick= {this.handleLogOutClick} toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
+            <MenuExampleEvenlyDivided handleLogOutClick={this.handleLogOutClick} toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
             <div className='form-container'>
                <NewBookForm makeNewBook={this.makeNewBook} />
             </div>
          </div>
       }
-      else if (this.state.formShowing === false && this.state.bookShowing) {
+      else if (this.state.formShowing === false && this.state.bookShowing && this.state.editFormShowing === false) {
          currentDisplay = <div className='app-container cool-background'>
-            <MenuExampleEvenlyDivided handleLogOutClick= {this.handleLogOutClick} showFormDetails={this.showFormDetails} toggleFormShowing={this.toggleFormShowing} />
+            <MenuExampleEvenlyDivided handleLogOutClick={this.handleLogOutClick} showFormDetails={this.showFormDetails} toggleFormShowing={this.toggleFormShowing} />
             <div className='paragraph-container'>
                <div id='site-word-container'>
                <div className='sight-word-card'>
@@ -358,10 +374,11 @@ class App extends Component {
             </div>
          </div>
       }
-      else if (this.state.formShowing === false && this.state.bookShowing === false) {
+      else if (this.state.formShowing === false && this.state.bookShowing === false && this.state.editFormShowing === false) {
          currentDisplay =
+
             <div className='app-container index-page'>
-               <MenuExampleEvenlyDivided handleLogOutClick= {this.handleLogOutClick} showFormDetails={this.showFormDetails} currentDisplay={currentDisplay} />
+               <MenuExampleEvenlyDivided toggleFormShowing={this.toggleFormShowing} handleLogOutClick={this.handleLogOutClick} showFormDetails={this.showFormDetails} currentDisplay={currentDisplay} />
                <BooksContainer
                   books={this.state.books}
                   myBooks={this.state.myBooks}
@@ -385,8 +402,13 @@ class App extends Component {
 
       return (
          <div>
-            {currentDisplay}
-         </div>
+            <Router>
+               <Switch>
+                  <Route path='/aboutus' component={() => <AboutUs />} />
+                  {currentDisplay}
+               </Switch>
+            </Router>
+         </div >
       )
    }
 }
