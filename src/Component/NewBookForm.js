@@ -43,26 +43,26 @@ class NewBookForm extends Component {
 
       <div className="book-form" >
 
-        <form className="ui equal width form" onChange={(event) => this.handleChange(event)} onSubmit={(event) => this.handleSubmit(event)}>
+        <form onChange={(event) => this.handleChange(event)} onSubmit={(event) => this.handleSubmit(event)}>
           <div className="field">
             <label>Poem Title:
             <input name="title" type='text' placeholder="Poem Title" value={this.state.value} />
             </label>
           </div>
 
-          <div className="field">
+          <div >
             <label>Poem Image:
             <input name="image" type='text' placeholder="Paste your image URL" value={this.state.value} />
             </label>
           </div>
 
-          <div className="field">
+          <div >
             <label>Poem Author:
              <input name="author" type='text' placeholder="Poem Author" value={this.state.value} />
             </label>
           </div>
 
-          <div className="field">
+          <div >
             <label>Grade</label>
             <select name="grade_id" className="ui fluid dropdown" value={this.state.value}>
               <option value="">Grade</option>
@@ -89,4 +89,3 @@ class NewBookForm extends Component {
 }
 
 export default NewBookForm;
-

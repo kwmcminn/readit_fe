@@ -1,20 +1,14 @@
-html,body,h1,h2,h3,h4,h5,div,span,{
+body {
    font-family: 'Indie Flower', cursive !important;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 
 .app-container {
    display: grid;
    grid-template-columns: 5% 1fr 5%;
-   height: 100vh;
+   grid-auto-rows: 5vh 1fr;
 }
 
-.nav-bar {
-   grid-column: 1/4;
-   height: 5%;
-   background-color: blue;
-}
 
 
 .books-container {
@@ -90,12 +84,14 @@ html,body,h1,h2,h3,h4,h5,div,span,{
    height: 100%;
    flex-direction: column;
    justify-content: space-around;
+   /* background-color: rgb(176, 224, 230,.3); */
+   box-shadow: -3px 2px 1px
 }
 
 .single-book:hover {
    transform: scale(1.05);
-   background-color: rgb(52, 255, 206);
-   box-shadow: -5px 2px 1px rgb(25,128,104);
+   background-color: rgb(255,192,170);
+   box-shadow: -5px 2px 1px black;
 }
 
 .book-cover{
@@ -111,6 +107,11 @@ html,body,h1,h2,h3,h4,h5,div,span,{
 .grade-title{
    grid-column: 1/4;
    text-align: center;
+   text-decoration: underline;
+}
+
+.book-title{
+font-weight: bold;
 }
 
 
@@ -143,12 +144,13 @@ html,body,h1,h2,h3,h4,h5,div,span,{
 .paragraph-container{
    display: grid;
    grid-column: 1/4;
-   height: 90vh;
+   height: 95vh;
    grid-template-columns: 15% 70% 15%
 }
 
 .paragraph-show-div{
    grid-column: 2;
+   overflow: visible;
 }
 
 /* Make it a marquee */
@@ -274,35 +276,45 @@ position: relative;
 }
 
 .sight-word-card{
-   height: 32%;
-   font-size: 2vw;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   background-image: url('http://www.clker.com/cliparts/k/N/y/G/S/w/pink-sticky-note-hi.png');
+   height: 40%;
+   width: 120%;
+   font-size: 2vh;
    background-size: contain;
    background-repeat: no-repeat;
    overflow: visible;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+
 }
 
 #sight-word-title{
    font-weight: bold;
+   margin-top: 10%;
+   font-size: 4vh;
+   text-decoration: underline;
+}
+
+.sight-li{
+   width: 100%;
 }
 
 #site-word-container{
    display: flex;
    grid-column: 1;
    flex-direction: column;
-
    justify-content: space-between;
 }
 
 .index-page{
-   height: 200vh;
+   height: 300vh;
+   width: 100%;
    position: absolute;
+   repeat: none;
    background-color: rgba(255,255,255,.7);
    background-image: url('./imgs/background.png');
+   background-size: cover;
    background-blend-mode: lighten;
 }
 
@@ -310,4 +322,50 @@ position: relative;
 
 #flower{
    width: 80%;
+}
+
+li{
+   list-style: decimal;
+}
+
+.about-us-link{
+   grid-column: 4;
+   grid-row: 1/2;
+}
+
+.write-poem-link{
+   grid-column: 2;
+   grid-row: 1/2;
+}
+
+.home-link{
+   grid-column: 1;
+   grid-row: 1/2;
+}
+
+.nav-bar {
+   display: grid;
+   grid-template-columns: 7% 13% 1fr 10%;
+   grid-column: 1/4;
+}
+
+.nav-item{
+   font-size: 2.5vh;
+
+}
+a{
+   text-decoration: none;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: ;
+   font-family: 'Permanent Marker', cursive;
+   border-top: solid;
+   border-bottom: solid;
+   height: 100%
+}
+
+.nothing{
+   grid-column: 3 auto;
+   grid-row: 1/2;
 }

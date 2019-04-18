@@ -251,7 +251,7 @@ class App extends Component {
    }
 
    getSightWords = (sightWords, paragraph) => {
-      let paraArray = paragraph.split(' ')
+      let paraArray = paragraph.toLowerCase().split(' ')
       let paragraphSightWords = []
       for (let i = 0; i < paraArray.length; i++) {
          if (sightWords.includes(paraArray[i])) {
@@ -401,15 +401,10 @@ class App extends Component {
       }
 
       return (
-         <div>
-            <Router>
-               <Switch>
-                  <Route path='/aboutus' component={() => <AboutUs />} />
-                  {currentDisplay}
-               </Switch>
-            </Router>
-         </div >
-      )
+        <div>
+           {currentDisplay}
+        </div >
+     )
    }
 }
 

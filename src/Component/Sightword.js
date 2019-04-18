@@ -2,8 +2,8 @@ import React from 'react';
 
 const Sightword = props => {
    return (
-         <div>
-            {props.words.map(word => <li>{word.toUpperCase()}</li>)}
+         <div classname='sight-li'>
+            {props.words.map(word => <li >{word.toUpperCase()}</li>)}
          </div>
    )
 }
