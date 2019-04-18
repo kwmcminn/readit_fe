@@ -19,7 +19,7 @@ export default class MenuExampleEvenlyDivided extends Component {
     return (
 
       <Menu className='nav-bar' secondary >
-         <Menu.Item color='red' name='Write Your Own Poem' active={activeItem === 'Write Your Own Poem'} onClick={this.handlePoemClick} />
+         <Menu.Item background='red' name='Write Your Own Poem' active={activeItem === 'Write Your Own Poem'} onClick={this.handlePoemClick} />
         <Menu.Item name='Write Your Own Poem' active={activeItem === 'Write Your Own Poem'} onClick={this.handlePoemClick} />
         <Menu.Item name='Go Home' active={activeItem === 'Go Home'} onClick={this.handleHomeClick} />
         <Menu.Item
