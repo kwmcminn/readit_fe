@@ -22,7 +22,7 @@ const Book = props => {
                   <h4 className='book-title'>{props.book.title}</h4>
 
                   <img alt="" className='book-cover' src={props.book.image} />
-                  <h5 className='author'> Author Goes Here </h5>
+                  <h5 className='author'>{props.book.author}</h5>
                </div >
          }
       </React.Fragment>

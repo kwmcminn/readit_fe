@@ -6,9 +6,15 @@ import './index.css';
 import MenuExampleEvenlyDivided from './Containers/Menu'
 import BooksContainer from './Containers/BooksContainer'
 import NewBookForm from './Component/NewBookForm'
+import Paragraph from './Component/Paragraph';
+import Sightword from './Component/Sightword';
 import UserSignIn from './Component/UserSignIn';
 import EditBook from './Component/EditBook';
 import AboutUs from './Component/AboutUs';
+
+import bird from './imgs/bird.png'
+import flower from  './imgs/flower.png'
+
 const BOOKAPI = `http://localhost:3000/books`
 const WORDAPI = `http://localhost:3000/words`
 
@@ -220,7 +226,7 @@ class App extends Component {
       let regexp;
       let html;
       let product;
-      let sightWords
+      let sightWords;
       if (book.grade_id === 1) {
          words = this.state.kinWords
       } else if (book.grade_id === 2) {
@@ -232,14 +238,14 @@ class App extends Component {
       }
       sightWords = this.getSightWords(words, book.paragraph)
       product = book.paragraph
-      this.speak(product)
       regexp = new RegExp(`\\b(${words.join('|')})\\b`, 'gi');
-      html = product.replace(regexp, '<span class="highlight">$&</span>')
+      html = product.replace(regexp, '>$&')
+      let splitArray = html.split(' ')
       this.setState({
          bookShowing: true,
          formShowing: false,
          editFormShowing: false,
-         displayedBook: html,
+         displayedBook: splitArray,
          displayedSightWords: sightWords
       })
    }
@@ -303,10 +309,11 @@ class App extends Component {
       }, () => window.location.reload())
    }
 
-   speak = (message) => {
+
+   sayWord = (message) => {
       let msg = new SpeechSynthesisUtterance(message)
       let voices = window.speechSynthesis.getVoices()
-      msg.voice = voices[0]
+      msg.voice = voices[32]
       msg.rate = .99;
       window.speechSynthesis.speak(msg)
    }
@@ -337,15 +344,21 @@ class App extends Component {
          currentDisplay = <div className='app-container cool-background'>
             <MenuExampleEvenlyDivided handleLogOutClick={this.handleLogOutClick} showFormDetails={this.showFormDetails} toggleFormShowing={this.toggleFormShowing} />
             <div className='paragraph-container'>
-               <span>Site Words</span>
+               <div id='site-word-container'>
+               <div className='sight-word-card'>
+                  <span id='sight-word-title' >Sight Words</span>
+                  <Sightword words={this.state.displayedSightWords}/>
+               </div>
+               <img  id='flower' src='http://www.tracwv.org/images/excited-birds-animated-1.gif' />
+               </div>
                <div className='speed-container'>
-                  <img id='bird-picture' src="https://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Cartoons-PNG/Large_Blue_Bird_PNG_Cartoon_Clipart.png?m=1434276645" />
+                  <img id='bird-picture' src='https://media.giphy.com/media/uZLUqZLXUFejm/giphy.gif' />
                   <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
                   <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
                </div>
                <div className='paragraph-show-div'>
                   <div className='marquee'>
-                     <span id='scrolling-paragraph' style={{ animation: `scroll-up ${this.state.speed}s linear infinite` }} >{ReactHtmlParser(this.state.displayedBook)}</span>
+                     <Paragraph sayWord={this.sayWord} speed={this.state.speed} words={this.state.displayedBook}/>
                   </div>
                </div>
             </div>
@@ -363,7 +376,8 @@ class App extends Component {
       }
       else if (this.state.formShowing === false && this.state.bookShowing === false && this.state.editFormShowing === false) {
          currentDisplay =
-            <div className='app-container'>
+
+            <div className='app-container index-page'>
                <MenuExampleEvenlyDivided toggleFormShowing={this.toggleFormShowing} handleLogOutClick={this.handleLogOutClick} showFormDetails={this.showFormDetails} currentDisplay={currentDisplay} />
                <BooksContainer
                   books={this.state.books}

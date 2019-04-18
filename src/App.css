@@ -93,8 +93,9 @@ html,body,h1,h2,h3,h4,h5,div,span,{
 }
 
 .single-book:hover {
-   transform: scale(1.2);
-   background-color: rgb(29, 161, 242);
+   transform: scale(1.05);
+   background-color: rgb(52, 255, 206);
+   box-shadow: -5px 2px 1px rgb(25,128,104);
 }
 
 .book-cover{
@@ -152,6 +153,7 @@ html,body,h1,h2,h3,h4,h5,div,span,{
 
 /* Make it a marquee */
 .marquee {
+cursor: pointer;
 height: 90vh;
 width: 80%;
 margin-left: 10%;
@@ -255,7 +257,7 @@ position: relative;
    grid-row: 1;
    display: flex;
    flex-direction: column;
-   justify-content: space-evenly;
+   justify-content: space-between;
 }
 
 
@@ -264,9 +266,48 @@ position: relative;
 }
 
 #bird-picture{
-   width: 50%;
+   width: 100%;
 
 }
 .ui.segment.secondary.Change:hover{
    background-color: blue;
+}
+
+.sight-word-card{
+   height: 32%;
+   font-size: 2vw;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background-image: url('http://www.clker.com/cliparts/k/N/y/G/S/w/pink-sticky-note-hi.png');
+   background-size: contain;
+   background-repeat: no-repeat;
+   overflow: visible;
+}
+
+#sight-word-title{
+   font-weight: bold;
+}
+
+#site-word-container{
+   display: flex;
+   grid-column: 1;
+   flex-direction: column;
+
+   justify-content: space-between;
+}
+
+.index-page{
+   height: 200vh;
+   position: absolute;
+   background-color: rgba(255,255,255,.7);
+   background-image: url('./imgs/background.png');
+   background-blend-mode: lighten;
+}
+
+
+
+#flower{
+   width: 80%;
 }
