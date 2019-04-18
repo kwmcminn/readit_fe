@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react'
 
 export default class MenuExampleEvenlyDivided extends Component {
@@ -19,16 +20,17 @@ export default class MenuExampleEvenlyDivided extends Component {
     return (
 
       <Menu className='nav-bar' secondary >
-         <Menu.Item color='red' name='Write Your Own Poem' active={activeItem === 'Write Your Own Poem'} onClick={this.handlePoemClick} />
+        <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleHomeClick} />
         <Menu.Item name='Write Your Own Poem' active={activeItem === 'Write Your Own Poem'} onClick={this.handlePoemClick} />
-        <Menu.Item name='Go Home' active={activeItem === 'Go Home'} onClick={this.handleHomeClick} />
         <Menu.Item
-             position='right'
-             name='logout'
-             active={activeItem === 'logout'}
-             onClick={this.props.handleLogOutClick}
-           />
-
+          position='right'
+          name='logout'
+          active={activeItem === 'logout'}
+          onClick={this.props.handleLogOutClick}
+        />
+        <Menu.Item>
+          <Link to='/aboutus'><button>About us</button></Link>
+        </Menu.Item>
       </Menu>
     )
   }
