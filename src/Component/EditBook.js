@@ -43,19 +43,19 @@ class EditBook extends Component {
         <form className="ui equal width form" onChange={(event) => this.handleChange(event)} onSubmit={(event) => this.handleSubmit(event)}>
           <div className="field">
             <label>Poem Title:
-            <input name="title" type='text' placeholder="Poem Title" value={this.state.title} />
+            <input className='input-field' name="title" type='text' placeholder="Poem Title" value={this.state.title} />
             </label>
           </div>
 
           <div className="field">
             <label>Poem Image:
-            <input name="image" type='text' placeholder="Paste your image URL" value={this.state.image} />
+            <input className='input-field' name="image" type='text' placeholder="Paste your image URL" value={this.state.image} />
             </label>
           </div>
 
           <div className="field">
             <label>Poem Author:
-             <input name="author" type='text' placeholder="Poem Author" value={this.state.author} />
+             <input className='input-field' name="author" type='text' placeholder="Poem Author" value={this.state.author} />
             </label>
           </div>
 

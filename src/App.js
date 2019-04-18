@@ -89,7 +89,7 @@ class App extends Component {
    }
 
    fetchingGrades() {
-      let myBooks0 = this.state.books.filter(book => book.user_id === this.state.myId)
+      let myBooks0 = (this.state.books.filter(book => book.user_id === this.state.myId)).reverse()
       let kindergarten0 = this.state.books.filter(book => book.grade.name === 'Kindergarten')
       let firstGrade1 = this.state.books.filter(book => book.grade.name.includes('First'))
       let secondGrade2 = this.state.books.filter(book => book.grade.name.includes('Second'))
@@ -353,8 +353,10 @@ class App extends Component {
                </div>
                <div className='speed-container'>
                   <img id='bird-picture' src='https://media.giphy.com/media/uZLUqZLXUFejm/giphy.gif' />
-                  <button class='increase-speed' onClick={this.increaseSpeed}>Increase</button>
-                  <button class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</button>
+                  <div className='speed-buttons'>
+                  <span class='increase-speed' onClick={this.increaseSpeed}>Increase</span>
+                  <span class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</span>
+                  </div>
                </div>
                <div className='paragraph-show-div'>
                   <div className='marquee'>

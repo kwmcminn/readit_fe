@@ -11,9 +11,11 @@ const Book = props => {
                   <h4 className='book-title'>{props.book.title}</h4>
 
                   <img alt="" className='book-cover' src={props.book.image} onClick={() => props.showBookDetails(props.book)} />
-                  <h5 className='author'> Author Goes Here </h5>
-                  <button onClick={() => props.showEdit(props.book)}>Edit</button>
-                  <button onClick={() => props.handleDelete(props.book.id)}>Delete</button>
+                  <h5 className='author'> by: {props.book.author} </h5>
+                  <div className='edit-buttons'>
+                     <span className='edit-button' onClick={() => props.showEdit(props.book)}>Edit</span>
+                     <span className='delete-button' onClick={() => props.handleDelete(props.book.id)}>Delete</span>
+                  </div>
                </div >
 
                :

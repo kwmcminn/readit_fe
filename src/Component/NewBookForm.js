@@ -44,26 +44,26 @@ class NewBookForm extends Component {
       <div className="book-form" >
 
         <form onChange={(event) => this.handleChange(event)} onSubmit={(event) => this.handleSubmit(event)}>
-          <div className="field">
+          <div className="fieldd">
             <label>Poem Title:
-            <input name="title" type='text' placeholder="Poem Title" value={this.state.value} />
+            <input className='input-field' name="title" type='text' placeholder="Poem Title" value={this.state.value} />
             </label>
           </div>
 
-          <div >
+          <div className="fieldd">
             <label>Poem Image:
-            <input name="image" type='text' placeholder="Paste your image URL" value={this.state.value} />
+            <input className='input-field' name="image" type='text' placeholder="Paste your image URL" value={this.state.value} />
             </label>
           </div>
 
           <div >
             <label>Poem Author:
-             <input name="author" type='text' placeholder="Poem Author" value={this.state.value} />
+             <input className='input-field' name="author" type='text' placeholder="Poem Author" value={this.state.value} />
             </label>
           </div>
 
-          <div >
-            <label>Grade</label>
+          <div className="fieldd">
+            <label>Grade: </label>
             <select name="grade_id" className="ui fluid dropdown" value={this.state.value}>
               <option value="">Grade</option>
               <option value="1">Kindergarten</option>
@@ -74,9 +74,9 @@ class NewBookForm extends Component {
 
           </div>
 
-          <div className="field">
-            <label>Poem</label>
-            <textarea name="paragraph" type='textarea' placeholder="Write your Poem" value={this.state.value}></textarea>
+          <div className="fieldd">
+            <label>Poem: </label>
+            <textarea className='input-field poem' name="paragraph" type='textarea' placeholder="Write your Poem" value={this.state.value}></textarea>
           </div>
 
           <button className="ui submit button" disabled={!isEnabled}>Submit</button>

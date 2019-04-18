@@ -9,7 +9,7 @@ class BooksContainer extends Component {
          <div className='books-container'>
             <div className='grade-container'>
                <div className='arrow-div-backward' onClick={() => this.props.decreaseIndex('myBooksIndex')}>
-                  <i className="huge arrow circle left icon back-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
                <h1 className='grade-title'>My Poems</h1>
                <div className='three-books'>
@@ -18,12 +18,12 @@ class BooksContainer extends Component {
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('myBooksIndex')}>
-                  <i className="huge arrow circle right icon forward-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
             </div>
             <div className='grade-container'>
                <div className='arrow-div-backward' onClick={() => this.props.decreaseIndex('kindergartenIndex')}>
-                  <i className="huge arrow circle left icon back-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
                <h1 className='grade-title'>Kindergarten</h1>
                <div className='three-books'>
@@ -32,12 +32,12 @@ class BooksContainer extends Component {
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('kindergartenIndex')}>
-                  <i className="huge arrow circle right icon forward-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
             </div>
             <div className='grade-container'>
                <div className='arrow-div-backward' onClick={() => this.props.decreaseIndex('firstIndex')}>
-                  <i className="huge arrow circle left icon back-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
                <h1 className='grade-title'>First Grade</h1>
                <div className='three-books'>
@@ -46,12 +46,12 @@ class BooksContainer extends Component {
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('firstIndex')}>
-                  <i className="huge arrow circle right icon forward-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
             </div>
             <div className='grade-container'>
                <div className='arrow-div-backward' onClick={() => this.props.decreaseIndex('secondIndex')}>
-                  <i className="huge arrow circle left icon back-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
                <h1 className='grade-title'>Second Grade</h1>
                <div className='three-books'>
@@ -60,12 +60,12 @@ class BooksContainer extends Component {
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('secondIndex')}>
-                  <i className="huge arrow circle right icon forward-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
             </div>
             <div className='grade-container'>
                <div className='arrow-div-backward' onClick={() => this.props.decreaseIndex('thirdIndex')}>
-                  <i className="huge arrow circle left icon back-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
                <h1 className='grade-title'>Third Grade</h1>
                <div className='three-books'>
@@ -74,7 +74,7 @@ class BooksContainer extends Component {
                   })}
                </div>
                <div className='arrow-div-forward' onClick={() => this.props.increaseIndex('thirdIndex')}>
-                  <i className="huge arrow circle right icon forward-button"></i>
+                  <img className='cupcake' src='https://appstickers-cdn.appadvice.com/1134045524/818127607/9916794f8de2c754a32d3097f619cc1a-1.png'/>
                </div>
             </div>
          </div>

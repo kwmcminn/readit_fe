@@ -1,41 +1,37 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 
 export default class MenuExampleEvenlyDivided extends Component {
-  state = {}
+   state = {}
 
-  handlePoemClick = (e, { name }) =>
-    this.setState({ activeItem: name }, () =>
-      this.props.showFormDetails())
+   handlePoemClick = () => {
+      this.props.showFormDetails()
+   }
 
-  handleHomeClick = (e, { name }) =>
-    this.setState({ activeItem: name }, () =>
-      this.props.toggleFormShowing())
+   handleHomeClick = () => {
+
+      this.props.toggleFormShowing()
+   }
 
 
-  render() {
+   render() {
 
-    return (
-      <div className='nav-bar' >
-         <Link className='about-us-link' to='/aboutus'>
-            <div className='nav-item' >
-               About Us
-            </div>
-         </Link>
-         <Link className='home-link' to='/'>
-            <div className='nav-item' >
+      return (
+         <div className='nav-bar' >
+
+            <div onClick={() => this.handleHomeClick()} className='nav-item' >
                Home
             </div>
-         </Link>
-         <div className='nothing'>
-               <Link ></Link>
-               </div>
-         <Link className='write-poem-link' onClick={() => this.handlePoemClick()}>
-            <div className='nav-item'>
+
+            <div className='nothing nav-item' onClick={() => this.props.handleLogOutClick()}>
+                  Logout
+            </div>
+
+            <div className='nav-item' onClick={() => this.handlePoemClick()}>
                Create a Poem
             </div>
-         </Link>
-      </div>
-   )
-  }
+            
+
+         </div>
+      )
+   }
 }
