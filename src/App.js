@@ -51,7 +51,7 @@ class App extends Component {
    };
 
    componentDidMount() {
-      fetch(`https://poemsbackend.herokuapp.com/books`
+      fetch(`https://poemsbackend.herokuapp.com/books`)
          .then(response => response.json())
          .then(json => {
             this.setState({
@@ -59,6 +59,7 @@ class App extends Component {
             }, () => this.grabWords())
          })
    }
+
 
    grabWords = () => {
       this.fetchingGrades()
