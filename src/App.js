@@ -13,10 +13,10 @@ import EditBook from './Component/EditBook';
 import AboutUs from './Component/AboutUs';
 
 import bird from './imgs/bird.png'
-import flower from  './imgs/flower.png'
+import flower from './imgs/flower.png'
 
-const BOOKAPI = `http://localhost:3000/books`
-const WORDAPI = `http://localhost:3000/words`
+const BOOKAPI = `poemsbackend.herokuapp.com/books`
+const WORDAPI = `poemsbackend.herokuapp.com/words`
 
 class App extends Component {
    constructor() {
@@ -345,22 +345,22 @@ class App extends Component {
             <MenuExampleEvenlyDivided handleLogOutClick={this.handleLogOutClick} showFormDetails={this.showFormDetails} toggleFormShowing={this.toggleFormShowing} />
             <div className='paragraph-container'>
                <div id='site-word-container'>
-               <div className='sight-word-card'>
-                  <span id='sight-word-title' >Sight Words</span>
-                  <Sightword words={this.state.displayedSightWords}/>
-               </div>
-               <img  id='flower' src='http://www.tracwv.org/images/excited-birds-animated-1.gif' />
+                  <div className='sight-word-card'>
+                     <span id='sight-word-title' >Sight Words</span>
+                     <Sightword words={this.state.displayedSightWords} />
+                  </div>
+                  <img id='flower' src='http://www.tracwv.org/images/excited-birds-animated-1.gif' />
                </div>
                <div className='speed-container'>
                   <img id='bird-picture' src='https://media.giphy.com/media/uZLUqZLXUFejm/giphy.gif' />
                   <div className='speed-buttons'>
-                  <span class='increase-speed' onClick={this.increaseSpeed}>Increase</span>
-                  <span class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</span>
+                     <span class='increase-speed' onClick={this.increaseSpeed}>Increase</span>
+                     <span class='decrease-speed' onClick={this.decreaseSpeed}>Decrease</span>
                   </div>
                </div>
                <div className='paragraph-show-div'>
                   <div className='marquee'>
-                     <Paragraph sayWord={this.sayWord} speed={this.state.speed} words={this.state.displayedBook}/>
+                     <Paragraph sayWord={this.sayWord} speed={this.state.speed} words={this.state.displayedBook} />
                   </div>
                </div>
             </div>
@@ -403,10 +403,10 @@ class App extends Component {
       }
 
       return (
-        <div>
-           {currentDisplay}
-        </div >
-     )
+         <div>
+            {currentDisplay}
+         </div >
+      )
    }
 }
 
