@@ -169,7 +169,7 @@ class App extends Component {
    }
 
    handleDelete = (id) => {
-      fetch(`https://poemsbackend.herokuapp.com/books/` + `${id}`,
+      fetch(`https://poemsbackend.herokuapp.com/books/${id}`,
          {
             method: 'DELETE',
             headers: {
@@ -197,7 +197,7 @@ class App extends Component {
 
    handleUpdate = (book) => {
       console.log("this is the book", book)
-      fetch(`https://poemsbackend.herokuapp.com/books/` + `${book.id}`,
+      fetch(`https://poemsbackend.herokuapp.com/books/${book.id}`,
          {
             method: 'PUT',
             body: JSON.stringify({ book: book }),
