@@ -15,6 +15,7 @@ import AboutUs from './Component/AboutUs';
 
 const BOOKAPI = `https://poemsbackend.herokuapp.com/books`
 const WORDAPI = `https://poemsbackend.herokuapp.com/words`
+const USERAPI = `https://poemsbackend.herokuapp.com/users`
 
 class App extends Component {
    constructor() {
@@ -149,7 +150,7 @@ class App extends Component {
 
    //Creating a new user
    createUser = (data) => {
-      fetch(`http://localhost:3000/users`, {
+      fetch(USERAPI, {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({
@@ -168,7 +169,7 @@ class App extends Component {
    }
 
    handleDelete = (id) => {
-      fetch(`http://localhost:3000/books/${id}`,
+      fetch(BOOKAPI + `${id}`,
          {
             method: 'DELETE',
             headers: {
@@ -196,7 +197,7 @@ class App extends Component {
 
    handleUpdate = (book) => {
       console.log("this is the book", book)
-      fetch(`http://localhost:3000/books/${book.id}`,
+      fetch(BOOKAPI + `${book.id}`,
          {
             method: 'PUT',
             body: JSON.stringify({ book: book }),
