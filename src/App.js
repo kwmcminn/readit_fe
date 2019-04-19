@@ -10,7 +10,6 @@ import Paragraph from './Component/Paragraph';
 import Sightword from './Component/Sightword';
 import UserSignIn from './Component/UserSignIn';
 import EditBook from './Component/EditBook';
-import AboutUs from './Component/AboutUs';
 
 
 const BOOKAPI = `https://poemsbackend.herokuapp.com/books`
@@ -52,7 +51,7 @@ class App extends Component {
    };
 
    componentDidMount() {
-      fetch(BOOKAPI)
+      fetch(`https://poemsbackend.herokuapp.com/books`
          .then(response => response.json())
          .then(json => {
             this.setState({
@@ -108,7 +107,7 @@ class App extends Component {
 
    makeNewBook = (paragraph, author, grade, image, title) => {
       let newGrade = parseInt(grade)
-      fetch(BOOKAPI, {
+      fetch(`https://poemsbackend.herokuapp.com/books`, {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({
@@ -150,7 +149,7 @@ class App extends Component {
 
    //Creating a new user
    createUser = (data) => {
-      fetch(USERAPI, {
+      fetch('https://poemsbackend.herokuapp.com/users', {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({
@@ -169,7 +168,7 @@ class App extends Component {
    }
 
    handleDelete = (id) => {
-      fetch(BOOKAPI + `${id}`,
+      fetch(`https://poemsbackend.herokuapp.com/books/` + `${id}`,
          {
             method: 'DELETE',
             headers: {
@@ -197,7 +196,7 @@ class App extends Component {
 
    handleUpdate = (book) => {
       console.log("this is the book", book)
-      fetch(BOOKAPI + `${book.id}`,
+      fetch(`https://poemsbackend.herokuapp.com/books/` + `${book.id}`,
          {
             method: 'PUT',
             body: JSON.stringify({ book: book }),
