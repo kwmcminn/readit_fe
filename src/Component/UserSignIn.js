@@ -29,7 +29,7 @@ class UserSignIn extends Component {
           <div className="field">
             <input id='username-field' name="username" type='text' placeholder="Username" />
           </div>
-          <button>Enter</button>
+          <button type='submit'>Enter</button>
         </form>
       </div >
     );
