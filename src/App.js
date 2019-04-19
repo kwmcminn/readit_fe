@@ -12,11 +12,9 @@ import UserSignIn from './Component/UserSignIn';
 import EditBook from './Component/EditBook';
 import AboutUs from './Component/AboutUs';
 
-import bird from './imgs/bird.png'
-import flower from './imgs/flower.png'
 
-const BOOKAPI = `poemsbackend.herokuapp.com/books`
-const WORDAPI = `poemsbackend.herokuapp.com/words`
+const BOOKAPI = `https://poemsbackend.herokuapp.com/books`
+const WORDAPI = `https://poemsbackend.herokuapp.com/words`
 
 class App extends Component {
    constructor() {
