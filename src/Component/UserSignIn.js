@@ -16,12 +16,11 @@ class UserSignIn extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log("about to post", this.state)
     this.props.createUser(this.state)
   }
 
   render() {
-     // <input id='signin-submit-button' className="ui submit button" type='submit' value="Submit Username" />
+    // <input id='signin-submit-button' className="ui submit button" type='submit' value="Submit Username" />
     return (
       <div className="sign-in">
         <h1 id='signin-logo'>Poems4Kids</h1>
@@ -30,6 +29,7 @@ class UserSignIn extends Component {
           <div className="field">
             <input id='username-field' name="username" type='text' placeholder="Username" />
           </div>
+          <button>Enter</button>
         </form>
       </div >
     );
