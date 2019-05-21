@@ -332,7 +332,7 @@ class App extends Component {
          </div>
       }
       else if (this.state.formShowing && this.state.bookShowing === false && this.state.editFormShowing === false) {
-         currentDisplay = <div className='app-container'>
+         currentDisplay = <div className='app-container cool-background'>
             <MenuExampleEvenlyDivided handleLogOutClick={this.handleLogOutClick} toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
             <div className='form-container'>
                <NewBookForm makeNewBook={this.makeNewBook} />
@@ -367,7 +367,7 @@ class App extends Component {
 
       }
       else if (this.state.formShowing === false && this.state.bookShowing === false && this.state.editFormShowing) {
-         currentDisplay = <div className='app-container'>
+         currentDisplay = <div className='app-container cool-background'>
             <MenuExampleEvenlyDivided toggleFormShowing={this.toggleFormShowing} showFormDetails={this.showFormDetails} />
             <div className='form-container'>
                <EditBook book={this.state.editBook} handleUpdate={this.handleUpdate} />
