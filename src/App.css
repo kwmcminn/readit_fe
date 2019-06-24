@@ -7,7 +7,12 @@ body {
    display: grid;
    grid-template-columns: 5% 1fr 5%;
    grid-auto-rows: 5vh 1fr;
-}
+   background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/SLNXDD6_Wj6rnchdv/videoblocks-sky-background-with-clouds-seamless-looping-animation-of-a-cartoon-spring-or-summer-blue-sky-backdrop-with-clouds-layers-moving-to-the-left_rjgzznjidm_thumbnail-full01.png); 
+   background-position:  center;
+   background-repeat: no-repeat;
+   overflow: auto;
+   background-size: cover;
+   }
 
 
 
@@ -300,11 +305,11 @@ position: relative;
 
 
 .cool-background{
-   background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/SLNXDD6_Wj6rnchdv/videoblocks-sky-background-with-clouds-seamless-looping-animation-of-a-cartoon-spring-or-summer-blue-sky-backdrop-with-clouds-layers-moving-to-the-left_rjgzznjidm_thumbnail-full01.png); 
-   background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/SLNXDD6_Wj6rnchdv/videoblocks-sky-background-with-clouds-seamless-looping-animation-of-a-cartoon-spring-or-summer-blue-sky-backdrop-with-clouds-layers-moving-to-the-left_rjgzznjidm_thumbnail-full01.png); 
+background-position:  center;
+background-repeat: no-repeat;
+overflow: auto;
+background-size: cover;
 
 }
 
